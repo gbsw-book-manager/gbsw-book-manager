@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'SUIT-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.loginBtn {
+    font-family: 'SUIT-Medium';
+    font-weight: bold;
+    margin-top: 10px;
+    border: 1px solid #ffe812;
+    width: 80px;
+    height: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: #ffe812;
+    color: #000;
+    border-radius: 4px;
+}
+
+.loginBtn:hover {
+    cursor: pointer;
+    border: 1px solid #e5c913;
+    background: #e5c913;
+}
