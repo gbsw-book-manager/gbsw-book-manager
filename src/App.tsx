@@ -5,6 +5,7 @@ import NotFound from "./pages/NotFound";
 import Return from "./pages/Return";
 import Register from "./pages/Register";
 import MyPage from "./pages/MyPage";
+import Login from "./pages/Login";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Route path="/return" element={<Return />} />
       <Route path="/register" element={<Register />} />
       <Route path="/mypage" element={<MyPage />} />
+      <Route path="/login" element={<Login/>} />
       <Route path={"*"} element={<NotFound />}/>
     </Routes>
   );
