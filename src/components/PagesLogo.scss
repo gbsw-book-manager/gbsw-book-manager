@@ -40,9 +40,9 @@ $images:
   }
 }
 
-.logoContainer {
+.pagesLogoContainer {
   width: 100px;
-  margin-top: -15px;
+  margin-top: -30px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
@@ -74,9 +74,9 @@ $images:
   filter: drop-shadow(0px 10px 5px rgba(0,0,0,0.25));
 }
 
-.page {
-  width: 60px;
-  height: 100px;
+.page2 {
+  width: 35px;
+  height: 70px;
   background-color: #bbb;
   position: absolute;
   top: 0px; right: 50%;
@@ -103,8 +103,8 @@ $images:
 
     &::after {
       content: '';
-      width: 60px;
-      height: 100px;
+      width: 35px;
+      height: 70px;
       position: absolute;
       top: 0px; right: 0%;
       transform-origin: center;
@@ -126,9 +126,9 @@ $images:
   transform-style: preserve-3d;
 }
 
-.flip {
-  width: 12px;
-  height: 100px;
+.flipv2 {
+  width: 8px;
+  height: 70px;
   position: absolute;
   top: 0px;
   transform-origin: 100% 100%;

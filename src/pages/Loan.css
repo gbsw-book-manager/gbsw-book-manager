@@ -1,0 +1,29 @@
+.mainTable {
+    width: 40rem;
+    margin-top: 40vh;
+    margin-left: 16vw;
+    margin-right: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    font-size: 14px;
+}
+td {
+    text-align: center;
+}
+th{
+    background-color: rgba(82, 151, 234, 0.9);
+    color: #FFFFF0;
+    font-family: 'Open Sans',Sans-serif;
+    font-weight: 600;
+}
+tr{
+    font-weight: 600;
+    font-family: 'Gowun Dodum', sans-serif;
+    background-color: #fff;
+}
+
+.bookTitle {
+    width: 300px;
+}
