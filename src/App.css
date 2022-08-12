@@ -1,7 +1,6 @@
 .statusBar {
   text-decoration: none;
-  margin-top: 20px;
-  margin-left: -30px;
+  margin-top: 10px;;
 }
 
 section {
@@ -11,7 +10,6 @@ section {
 .divider {
   border: 1px solid #aaa;
   width: 100%;
-  margin-left: -30px;
   margin-top: 10px;
 }
 

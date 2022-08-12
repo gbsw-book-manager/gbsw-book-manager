@@ -9,58 +9,20 @@ import { CgProfile } from 'react-icons/cg'
 
 const SideBar = () => {
   return (
-    <div className={'pagesBackground'}>
-      <nav className="sidebar">
-        <header>
-          <div className="image-text">
-          <span className="image">
-            <PagesLogo/>
-            <div className='logoTitle' style={{ marginTop: '1px', fontSize: '15px' }}>Gbsw Book Manager</div>
-          </span>
-          </div>
-        </header>
+    <div>
+       <aside className="sidebar">
+          <PagesLogo/>
+          <div className='logoTitle' style={{ marginTop: '10px', color: '#fff', fontSize: '15px'}}>Gbsw Book Manager</div>
+          <br/><br/>
 
-        <div className="menu-bar">
-          <div className="menu">
-            <ul className="menu-links">
-              <li className="nav-link">
-                <a href="/">
-                  <AiOutlineHome className={'sidebar-icons'}/>
-                  <span className="text nav-text">홈</span>
-                </a>
-              </li>
-
-              <li className="nav-link">
-                <a href="/loan">
-                  <ImBooks className={'sidebar-icons'}/>
-                  <span className="text nav-text">도서 대출</span>
-                </a>
-              </li>
-
-                <li className="nav-link">
-                <a href="/return">
-                  <IoReturnDownBack className={'sidebar-icons'}/>
-                  <span className="text nav-text">도서 반납</span>
-                </a>
-              </li>
-
-              <li className="nav-link">
-                <a href="/register">
-                  <GiNotebook className={'sidebar-icons'}/>
-                  <span className="text nav-text">희망도서 신청</span>
-                </a>
-              </li>
-
-              <li className="nav-link">
-                <a href="/mypage">
-                  <CgProfile className={'sidebar-icons'}/>
-                  <span className="text nav-text">마이페이지</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+          <nav className="menu">
+            <a href="/" className="menu-item"> <AiOutlineHome className={'menu-icons'}/> <span>홈</span></a>
+            <a href="/loan" className="menu-item"><ImBooks className={'menu-icons'}/> <span>도서 대출</span></a>
+            <a href="/return" className="menu-item"><IoReturnDownBack className={'menu-icons'}/> <span>도서 반납</span></a>
+            <a href="/register" className="menu-item"><GiNotebook className={'menu-icons'}/> <span>희망도서 신청</span></a>
+            <a href="/mypage" className="menu-item"><CgProfile className={'menu-icons'}/> <span>마이페이지</span></a>
+          </nav>
+        </aside>
     </div>
   )
 }

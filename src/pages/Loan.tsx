@@ -18,8 +18,9 @@ const Loan = () => {
   else {
     return (
       <div>
+        <div className={'app'}>
         <SideBar/>
-        <section className={'home'}>
+        <main className="content">
           <div className={'statusBar'}><a href={'/'} style={{ color: '#999' }}>홈</a> {'>'} <a href={'/loan'} style={{ color: '#000' }}>도서 대출</a></div>
           <div className={'divider'}></div>
           <table className={'mainTable'}>
@@ -46,7 +47,8 @@ const Loan = () => {
             ))}
             </tbody>
           </table>
-        </section>
+        </main>
+        </div>
       </div>
     )
   }
