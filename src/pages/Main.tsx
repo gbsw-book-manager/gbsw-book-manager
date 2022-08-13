@@ -5,7 +5,7 @@ import returnImage from '../images/return.png'
 import registerImage from '../images/register.png'
 import profileImage from '../images/profile.png'
 import MainLogo from "../components/MainLogo";
-import LoginButton from "../components/LoginButton";
+import Buttons from "../components/Buttons";
 
 const Main = () => {
   return (
@@ -14,7 +14,7 @@ const Main = () => {
       <div className='logoTitle'>Gbsw Book Manager</div>
       <br/>
 
-      <LoginButton/>
+      <Buttons/>
 
       <div className="container">
 

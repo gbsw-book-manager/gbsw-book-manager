@@ -2,7 +2,7 @@ import React from 'react';
 import SideBar from "../components/SideBar";
 import fetcher from "../utils/fetcher";
 import useSWR from 'swr'
-import './Loan.css'
+import '../styles/Loan.css'
 import Loading from "../components/Loading";
 
 const Loan = () => {

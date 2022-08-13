@@ -1,19 +1,26 @@
 import React, {ChangeEvent, useState} from "react";
 import PagesLogo from "../components/PagesLogo";
-import './Login.css'
+import '../styles/Login.css'
 
 const Login = () => {
+  const [isIdFilled, setIsIdFilled] = useState<boolean>()
+  const [isPasswordFilled, setIsPasswordFilled] = useState<boolean>()
   const [id, setId] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
   const loginHandler = () => {
-    if (id === '') {
-      alert('아이디를 입력하세요.')
+    if (id != '') {
+      setIsIdFilled(true)
+    } else {
+      setIsIdFilled(false)
     }
-    else if (password === '') {
-      alert('비밀번호를 입력하세요.')
+
+    if (password != '') {
+      setIsPasswordFilled(true)
+    } else {
+      setIsPasswordFilled(false)
     }
-    else {
+    if (isIdFilled && isPasswordFilled) {
       alert('로그인 완료')
       window.location.replace('/')
     }
@@ -33,7 +40,7 @@ const Login = () => {
 
       <input
           className="form userid-form"
-          placeholder="아이디"
+          placeholder="email"
           type="text"
           name="userid"
           required
@@ -42,12 +49,11 @@ const Login = () => {
           onChange={(e:ChangeEvent<HTMLInputElement>) => setId(e.target.value)}
           onKeyPress={handleOnKeyPress}
         />
-
         <br/>
 
         <input
           className="form password-form"
-          placeholder="비밀번호"
+          placeholder="password"
           type="password"
           name="password"
           required
@@ -57,6 +63,8 @@ const Login = () => {
         />
 
         <button className="form-button" onClick={loginHandler}>로그인</button>
+
+      <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '14px' }}>아이디가 없으신가요? <a href={'/signup'}>회원가입</a></div>
     </div>
   )
 }
