@@ -36,18 +36,18 @@ tr{
 
 .tableContainer {
     overflow: auto;
-    margin-top: 70px;
+    margin-top: 5vh;
     margin-left: auto;
     margin-right: auto;
-    width: 1000px;
-    height: 550px;
+    width: 80vw;
+    height: 70vh;
 }
 
 .tr:checked {
     background-color: #007AFE;
 }
 
-#loanBtn {
+#dynamicBtn {
     border-radius: 5px;
     height: 40px;
     width: 150px;
@@ -68,6 +68,16 @@ tr{
     cursor: pointer;
 }
 
-.loanBtnNotActive {
+.returnBtnActive {
+    background-color: #f65959;
+    cursor: pointer;
+    color: #fff;
+}
+
+.returnBtnActive:hover {
+    background-color: #dc4e4e;
+}
+
+.btnNotActive {
     background-color: #ccc;
 }
