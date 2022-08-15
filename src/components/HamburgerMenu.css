@@ -1,0 +1,115 @@
+.mainTable {
+    border: 1px solid #fff;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label #menu {
+    position: absolute;
+    right: -100px;
+    top: -100px;
+    z-index: 100;
+    width: 200px;
+    height: 200px;
+    border-radius: 50% 50% 50% 50%;
+    -webkit-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    box-shadow: 0 0 0 0 #fff, 0 0 0 0 #fff;
+    cursor: pointer;
+}
+
+.clicked {
+    background: #2c2f33;
+}
+
+.notClicked {
+    background: #fff;
+}
+
+label .hamburger {
+    position: absolute;
+    top: 135px;
+    left: 50px;
+    width: 30px;
+    height: 2px;
+    background: #7289da;
+    display: block;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+}
+
+label .hamburger:after, label .hamburger:before {
+    -webkit-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #7289da;
+}
+
+label .hamburger:before { top: -10px; }
+
+label .hamburger:after { bottom: -10px; }
+
+label input { display: none; }
+
+label input:checked + #menu {
+    box-shadow: 0 0 0 100vw #2c2f33, 0 0 0 100vh #2c2f33;
+    border-radius: 0;
+
+}
+
+label input:checked + #menu .hamburger {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+
+}
+
+label input:checked + #menu .hamburger:after {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    bottom: 0;
+
+}
+
+label input:checked + #menu .hamburger:before {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    top: 0;
+
+}
+
+label input:checked + #menu + ul { opacity: 1; }
+
+label ul {
+    margin-left: -4vw;
+    z-index: 200;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    -webkit-transition: .25s 0s ease-in-out;
+    transition: .25s 0s ease-in-out;
+}
+
+ul button {
+    border: none;
+    width: 120px;
+    height: 40px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: #fff;
+    background-color: rgba(43, 95, 147, 0.9);
+    border-radius: 5px;
+}
+
+ul .bottomBtn {
+    margin-top: 30px;
+}

@@ -8,6 +8,8 @@ const Loan = () => {
     query: '(min-width: 900px)'
   })
 
+  console.log(isPC)
+
   return (
     isPC ? <LoanDesktop/> : <LoanMobile/>
   )

@@ -61,7 +61,7 @@ const Return = () => {
                 </tbody>
               </table>
             </div>
-            <button className={checkedInputs.length == 0 ? 'btnNotActive' : 'returnBtnActive'} id={'dynamicBtn'}>반납하기</button>
+            <button className={checkedInputs.length === 0 ? 'btnNotActive' : 'returnBtnActive'} id={'dynamicBtn'}>반납하기</button>
           </main>
         </div>
       </div>

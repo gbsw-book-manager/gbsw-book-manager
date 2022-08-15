@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import fetcher from "../../utils/fetcher";
 import useSWR from 'swr'
 import '../../styles/Table.css'
-import Loading from "../../components/Loading.css";
+import Loading from "../../components/Loading";
+import HamburgerMenu from "../../components/HamburgerMenu";
 
 const LoanMobile = () => {
   const [checkedInputs, setCheckedInputs] = useState([]);
@@ -26,6 +27,7 @@ const LoanMobile = () => {
     return (
       <div>
         <div className={'app'}>
+          <HamburgerMenu/>
           <main className="content">
             <div className={'statusBar'}>
               <a href={'/'} style={{color: '#999'}}>홈</a> {'>'}
@@ -63,7 +65,7 @@ const LoanMobile = () => {
                 </tbody>
               </table>
             </div>
-            <button className={checkedInputs.length == 0 ? 'btnNotActive' : 'loanBtnActive'} id={'dynamicBtn'}>대출하기</button>
+            <button className={checkedInputs.length === 0 ? 'btnNotActive' : 'loanBtnActive'} id={'dynamicBtn'} style={{ marginTop: '1px' }}>대출하기</button>
           </main>
         </div>
       </div>

@@ -6,7 +6,7 @@ const Register = () => {
   const [isTitleFilled, setIsTitleFilled] = useState<boolean>(false)
 
   const checkLength = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length != 0) {
+    if (e.target.value.length !== 0) {
       setIsTitleFilled(true)
     }
   }

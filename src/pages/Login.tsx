@@ -9,13 +9,13 @@ const Login = () => {
   const [password, setPassword] = useState<string>('')
 
   const loginHandler = () => {
-    if (id != '') {
+    if (id !== '') {
       setIsIdFilled(true)
     } else {
       setIsIdFilled(false)
     }
 
-    if (password != '') {
+    if (password !== '') {
       setIsPasswordFilled(true)
     } else {
       setIsPasswordFilled(false)

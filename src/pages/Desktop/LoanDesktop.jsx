@@ -3,7 +3,7 @@ import SideBar from "../../components/SideBar";
 import fetcher from "../../utils/fetcher";
 import useSWR from 'swr'
 import '../../styles/Table.css'
-import Loading from "../../components/Loading.css";
+import Loading from "../../components/Loading";
 
 const LoanDesktop = () => {
   const [checkedInputs, setCheckedInputs] = useState([]);
@@ -65,7 +65,7 @@ const LoanDesktop = () => {
                 </tbody>
               </table>
             </div>
-            <button className={checkedInputs.length == 0 ? 'btnNotActive' : 'loanBtnActive'} id={'dynamicBtn'}>대출하기</button>
+            <button className={checkedInputs.length === 0 ? 'btnNotActive' : 'loanBtnActive'} id={'dynamicBtn'}>대출하기</button>
           </main>
         </div>
       </div>
@@ -74,3 +74,4 @@ const LoanDesktop = () => {
 }
 
 export default LoanDesktop;
+
