@@ -81,3 +81,14 @@ tr{
 .btnNotActive {
     background-color: #ccc;
 }
+@media (max-width: 900px) {
+    th {
+        font-size: 10px;
+    }
+    td {
+        font-size: 12px;
+    }
+    #dynamicBtn {
+        margin-top: 20px;
+    }
+}

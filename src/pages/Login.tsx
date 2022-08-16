@@ -44,7 +44,6 @@ const Login = () => {
           type="text"
           name="userid"
           required
-          style={{marginTop: '40px'}}
           value={id}
           onChange={(e:ChangeEvent<HTMLInputElement>) => setId(e.target.value)}
           onKeyPress={handleOnKeyPress}

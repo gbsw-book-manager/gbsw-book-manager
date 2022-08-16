@@ -18,7 +18,7 @@ const SideBar = () => {
           <nav className="menu">
             <a href="/" className="menu-item"> <AiOutlineHome className={'menu-icons'}/> <span>홈</span></a>
             <a href="/loan" className="menu-item"><ImBooks className={'menu-icons'}/> <span>도서 대출</span></a>
-            <a href="/Return" className="menu-item"><IoReturnDownBack className={'menu-icons'}/> <span>도서 반납</span></a>
+            <a href="/Desktop/ReturnDesktop.jsx" className="menu-item"><IoReturnDownBack className={'menu-icons'}/> <span>도서 반납</span></a>
             <a href="/register" className="menu-item"><GiNotebook className={'menu-icons'}/> <span>희망도서 신청</span></a>
             <a href="/mypage" className="menu-item"><CgProfile className={'menu-icons'}/> <span>마이페이지</span></a>
           </nav>

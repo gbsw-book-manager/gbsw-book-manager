@@ -49,3 +49,22 @@
     background-color: #e5c913;
     cursor: pointer;
 }
+
+.userid-form {
+    margin-top: 40px;
+}
+
+@media (max-width: 900px) {
+    .form {
+        width: 80vw;
+        max-width: 300px;
+    }
+    .form-button {
+        width: 85vw;
+        max-width: 310px;
+    }
+    .signupButton {
+        width: 85vw;
+        max-width: 310px;
+    }
+}

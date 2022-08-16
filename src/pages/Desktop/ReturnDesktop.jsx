@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import SideBar from "../components/SideBar";
-import fetcher from "../utils/fetcher";
+import SideBar from "../../components/SideBar";
+import fetcher from "../../utils/fetcher";
 import useSWR from 'swr'
-import '../styles/Table.css'
-import Loading from "../components/Loading";
+import '../../styles/Table.css'
+import Loading from "../../components/Loading";
 
-const Return = () => {
+const ReturnDesktop = () => {
   const [checkedInputs, setCheckedInputs] = useState([]);
 
   const {data, error} = useSWR('http://localhost:8080/api/book', fetcher)
@@ -69,4 +69,4 @@ const Return = () => {
   }
 }
 
-export default Return;
+export default ReturnDesktop;

@@ -5,7 +5,7 @@ import '../../styles/Table.css'
 import Loading from "../../components/Loading";
 import HamburgerMenu from "../../components/HamburgerMenu";
 
-const LoanMobile = () => {
+const ReturnMobile = () => {
   const [checkedInputs, setCheckedInputs] = useState([]);
 
   const {data, error} = useSWR('http://localhost:8080/api/book', fetcher)
@@ -17,7 +17,6 @@ const LoanMobile = () => {
       setCheckedInputs(checkedInputs.filter((el) => el !== id));
     }
   }
-
 
   if (error) {
     return <div>ERROR</div>
@@ -31,20 +30,19 @@ const LoanMobile = () => {
           <main className="content">
             <div className={'statusBar'}>
               <a href={'/'} style={{color: '#999'}}>홈</a> {'>'}
-              <a href={'/loan'} style={{color: '#000'}}> 도서 대출</a>
+              <a href={'/return'} style={{color: '#000'}}> 도서 반납</a>
             </div>
             <div className={'divider'}></div>
             <div className={'tableContainer'}>
+              <div>ooo님의 대출 도서 수 : {data.length}</div>
               <table className={'mainTable'}>
                 <thead>
                 <tr>
-                  <th></th>
+                  <th/>
                   <th>ID</th>
-                  <th>제목</th>
+                  <th style={{width: '300px'}}>제목</th>
                   <th>저자</th>
                   <th>출판사</th>
-                  <th>총<br/>수량</th>
-                  <th>남은<br/>수량</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -58,14 +56,12 @@ const LoanMobile = () => {
                     <td>{log.title}</td>
                     <td>{log.author}</td>
                     <td>{log.publisher}</td>
-                    <td>{log.quantity}</td>
-                    <td>{log.quantityleft}</td>
                   </tr>
                 ))}
                 </tbody>
               </table>
             </div>
-            <button className={checkedInputs.length === 0 ? 'btnNotActive' : 'loanBtnActive'} id={'dynamicBtn'}>대출하기</button>
+            <button className={checkedInputs.length === 0 ? 'btnNotActive' : 'returnBtnActive'} id={'dynamicBtn'}>반납하기</button>
           </main>
         </div>
       </div>
@@ -73,4 +69,4 @@ const LoanMobile = () => {
   }
 }
 
-export default LoanMobile;
+export default ReturnMobile;

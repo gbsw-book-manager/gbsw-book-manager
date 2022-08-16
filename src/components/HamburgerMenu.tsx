@@ -20,7 +20,7 @@ const HamburgerMenu = () => {
       <label>
         <input type="checkbox"/>
         <span id="menu" className={isClicked ? 'clicked' : 'notClicked'} onClick={clickHandler}> <span className="hamburger"></span> </span>
-        <ul>
+        <ul className={isClicked ? 'show' : 'notShow'}>
           <a href={'/'}>
             <button style={{marginTop: '-10vh'}}><AiOutlineHome className={'menu-icons'}/> 홈</button>
           </a> <br/>
