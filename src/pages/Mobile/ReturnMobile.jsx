@@ -40,7 +40,7 @@ const ReturnMobile = () => {
                 <tr>
                   <th/>
                   <th>ID</th>
-                  <th style={{width: '300px'}}>제목</th>
+                  <th>제목</th>
                   <th>저자</th>
                   <th>출판사</th>
                 </tr>
@@ -48,9 +48,10 @@ const ReturnMobile = () => {
                 <tbody>
                 {Object.values(data).map((log) => (
                   <tr key={1}>
-                    <td className="checkbox-td"><input type="checkbox" name={`${log.title}`} className="checkbox-box"
-                                                       id={log.id} onChange={(e) => {checkEvent(e.currentTarget.checked, log.id)}}
-                                                       checked={!checkedInputs.includes(log.id) ? false : true}/>
+                    <td className="checkbox-td">
+                        <input type="checkbox" name={`${log.title}`} className="checkbox-box"
+                        id={log.id} onChange={(e) => {checkEvent(e.currentTarget.checked, log.id)}}
+                        checked={!checkedInputs.includes(log.id) ? false : true}/>
                     </td>
                     <td>{log.id}</td>
                     <td>{log.title}</td>
