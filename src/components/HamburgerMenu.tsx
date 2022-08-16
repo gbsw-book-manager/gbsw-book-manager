@@ -7,37 +7,32 @@ import {GiNotebook} from 'react-icons/gi'
 import {CgProfile} from 'react-icons/cg'
 
 const HamburgerMenu = () => {
-  const [isClicked, setIsClicked] = useState<boolean>(false)
-
-  const clickHandler = () => {
-    setIsClicked(!isClicked)
-  }
-
-  console.log(isClicked)
-
   return (
     <div>
-      <label>
-        <input type="checkbox"/>
-        <span id="menu" className={isClicked ? 'clicked' : 'notClicked'} onClick={clickHandler}> <span className="hamburger"></span> </span>
-        <ul className={isClicked ? 'show' : 'notShow'}>
-          <a href={'/'}>
-            <button style={{marginTop: '-10vh'}}><AiOutlineHome className={'menu-icons'}/> 홈</button>
-          </a> <br/>
-          <a href={'/loan'}>
-            <button className={'bottomBtn'}><ImBooks className={'menu-icons'}/> 도서 대출</button>
-          </a> <br/>
-          <a href={'/return'}>
-            <button className={'bottomBtn'}><IoReturnDownBack className={'menu-icons'}/> 도서 반납</button>
-          </a> <br/>
-          <a href={'/register'}>
-            <button className={'bottomBtn'}><GiNotebook className={'menu-icons'}/> 희망도서 신청</button>
-          </a> <br/>
-          <a href={'/mypage'}>
-            <button className={'bottomBtn'}><CgProfile className={'menu-icons'}/> 마이페이지</button>
-          </a>
+      <input type="checkbox" id="active" className={'hamburger-check'}/>
+      <label htmlFor="active" className="menu-btn"><span></span></label>
+      <label htmlFor="active" className="close"></label>
+      <div className="hamburger-wrapper">
+        <ul>
+          <div className={'hrefContainer'}>
+            <a href={'/'}>
+              <button style={{marginTop: '15vh'}}><AiOutlineHome className={'menu-icons'}/> 홈</button>
+            </a> <br/>
+            <a href={'/loan'}>
+              <button className={'bottomBtn'}><ImBooks className={'menu-icons'}/> 도서 대출</button>
+            </a> <br/>
+            <a href={'/return'}>
+              <button className={'bottomBtn'}><IoReturnDownBack className={'menu-icons'}/> 도서 반납</button>
+            </a> <br/>
+            <a href={'/register'}>
+              <button className={'bottomBtn'}><GiNotebook className={'menu-icons'}/> 희망도서 신청</button>
+            </a> <br/>
+            <a href={'/mypage'}>
+              <button className={'bottomBtn'}><CgProfile className={'menu-icons'}/> 마이페이지</button>
+            </a>
+          </div>
         </ul>
-      </label>
+      </div>
     </div>
   )
 }

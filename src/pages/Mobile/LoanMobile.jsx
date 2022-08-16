@@ -18,7 +18,6 @@ const LoanMobile = () => {
     }
   }
 
-
   if (error) {
     return <div>ERROR</div>
   } else if (!data) {
