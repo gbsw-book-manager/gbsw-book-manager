@@ -25,7 +25,7 @@ const HamburgerMenu = () => {
             <a href={'/student-management'}>
               <button className={'bottomBtn'}><MdManageAccounts className={'menu-icons'}/> 학생 관리</button>
             </a> <br/>
-            <a href={'/register'}>
+            <a href={'/overdue-list'}>
               <button className={'bottomBtn'}><MdWatchLater className={'menu-icons'}/> 연채자 목록</button>
             </a> <br/>
             <a href={'/register'}>

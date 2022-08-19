@@ -13,13 +13,14 @@ const SideBar = () => {
       <aside className="sidebar">
         <PagesLogo/>
         <div className='logoTitle' style={{ marginTop: '10px', color: '#fff', fontSize: '13px'}}>Gbsw Book Manager</div>
+        <div style={{ textAlign: 'center', fontSize: '11px', marginTop: '3px', color: '#24d453', fontFamily: 'Y_Spotlight'}}>Admin</div>
         <br/><br/>
 
         <nav className="menu">
           <a href="/" className="menu-item"> <AiOutlineHome className={'menu-icons'}/> <span>홈</span></a>
           <a href="/book-management" className="menu-item"><BsBook className={'menu-icons'}/> <span>도서 관리</span></a>
           <a href="/student-management" className="menu-item"><MdManageAccounts className={'menu-icons'}/> <span>학생 관리</span></a>
-          <a href="/register" className="menu-item"><MdWatchLater className={'menu-icons'}/> <span>연채자 목록</span></a>
+          <a href="/overdue-list" className="menu-item"><MdWatchLater className={'menu-icons'}/> <span>연채자 목록</span></a>
           <a href="/register" className="menu-item"><FaClipboardList className={'menu-icons'}/> <span>희망도서 목록</span></a>
           <a href="/mypage" className="menu-item"><CgProfile className={'menu-icons'}/> <span>마이페이지</span></a>
         </nav>
