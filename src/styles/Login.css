@@ -51,7 +51,47 @@
 }
 
 .userid-form {
-    margin-top: 40px;
+    margin-top: 30px;
+}
+
+.signup-userid-form {
+    margin-top: 20px;
+    width: 300px;
+    float: left;
+}
+
+.emailForm {
+    margin-left: auto;
+    margin-right: auto;
+    /*border: 1px solid #000;*/
+    height: 85px;
+    width: 415px;
+}
+
+.emailInputTag {
+    width: 415px;
+    height: 70px;
+}
+
+.getCodeBtn {
+    color: #fff;
+    border: none;
+    float: right;
+    width: 90px;
+    height: 48px;
+    margin-top: 20px;
+    font-weight: bold;
+    background-color: #03c75a;
+    border-radius: 5px;
+}
+
+.getCodeBtn:hover {
+    background-color: #03a84c;
+    cursor: pointer;
+}
+
+.code-form::placeholder {
+    color: #007AFE;
 }
 
 @media (max-width: 900px) {
@@ -66,5 +106,12 @@
     .signupButton {
         width: 85vw;
         max-width: 310px;
+    }
+    .emailForm {
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid #fff;
+        height: 85px;
+        width: 315px;
     }
 }

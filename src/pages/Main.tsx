@@ -4,8 +4,8 @@ import loan from '../images/loan.png'
 import returnImage from '../images/return.png'
 import registerImage from '../images/register.png'
 import profileImage from '../images/profile.png'
-import MainLogo from "../components/MainLogo";
-import Buttons from "../components/Buttons";
+import MainLogo from "../components/MainLogo"
+import Buttons from "../components/Buttons"
 
 const Main = () => {
   return (

@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useState} from "react";
 import PagesLogo from "../components/PagesLogo";
 import '../styles/Login.css'
+import axios, {AxiosResponse} from "axios";
 
 const Login = () => {
   const [isIdFilled, setIsIdFilled] = useState<boolean>()
@@ -21,14 +22,33 @@ const Login = () => {
       setIsPasswordFilled(false)
     }
     if (isIdFilled && isPasswordFilled) {
-      alert('로그인 완료')
-      window.location.replace('/')
+      let data = {
+        'username': id,
+        'password': password
+      }
+
+      fetch('/api/login',
+        {
+          method: "POST",
+          body: `username=${id}&password=${password}`,
+
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          }
+        }
+      ).then(response => response.json())
+        .then(res => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 
   const handleOnKeyPress = (e: any) => {
     if (e.key === 'Enter') {
-      loginHandler();
+      loginHandler()
     }
   };
 
@@ -39,31 +59,32 @@ const Login = () => {
       <div className='logoTitle' style={{fontSize: '15px', marginTop: '4px'}}>Gbsw Book Manager</div>
 
       <input
-          className="form userid-form"
-          placeholder="email"
-          type="text"
-          name="userid"
-          required
-          value={id}
-          onChange={(e:ChangeEvent<HTMLInputElement>) => setId(e.target.value)}
-          onKeyPress={handleOnKeyPress}
-        />
-        <br/>
+        className="form userid-form"
+        placeholder="email"
+        type="text"
+        name="userid"
+        required
+        value={id}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setId(e.target.value)}
+        onKeyPress={handleOnKeyPress}
+      />
+      <br/>
 
-        <input
-          className="form password-form"
-          placeholder="password"
-          type="password"
-          name="password"
-          required
-          value={password}
-          onChange={(e:ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-          onKeyPress={handleOnKeyPress}
-        />
+      <input
+        className="form password-form"
+        placeholder="password"
+        type="password"
+        name="password"
+        required
+        value={password}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+        onKeyPress={handleOnKeyPress}
+      />
 
-        <button className="form-button" onClick={loginHandler}>로그인</button>
+      <button className="form-button" onClick={loginHandler}>로그인</button>
 
-      <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '14px' }}>아이디가 없으신가요? <a href={'/signup'}>회원가입</a></div>
+      <div style={{textAlign: 'center', marginTop: '20px', fontSize: '14px'}}>아이디가 없으신가요? <a href={'/signup'}>회원가입</a>
+      </div>
     </div>
   )
 }

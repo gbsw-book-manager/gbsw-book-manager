@@ -7,6 +7,8 @@ import MyPage from "./pages/MyPage";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Return from "./pages/Return";
+import BookManagement from "./pages/BookManagement";
+import StudentManagement from "./pages/StudentManagement";
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/login" element={<Login/>} />
       <Route path="/signup" element={<SignUp/>} />
+      <Route path="/book-management" element={<BookManagement/>}/>
+      <Route path="/student-management" element={<StudentManagement/>}/>
       <Route path={"*"} element={<NotFound />}/>
     </Routes>
   );

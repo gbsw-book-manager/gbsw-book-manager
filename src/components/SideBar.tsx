@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import './SideBar.css'
-import PagesLogo from "./PagesLogo";
+import PagesLogo from "./PagesLogo"
 import { AiOutlineHome } from 'react-icons/ai'
 import { ImBooks } from 'react-icons/im'
 import { IoReturnDownBack } from 'react-icons/io5'

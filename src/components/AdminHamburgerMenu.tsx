@@ -1,10 +1,10 @@
 import React from "react"
 import './HamburgerMenu.css'
 import {AiOutlineHome} from 'react-icons/ai'
-import {ImBooks} from 'react-icons/im'
-import {IoReturnDownBack} from 'react-icons/io5'
-import {GiNotebook} from 'react-icons/gi'
 import {CgProfile} from 'react-icons/cg'
+import {BsBook} from "react-icons/bs";
+import {MdManageAccounts, MdWatchLater} from "react-icons/md";
+import {FaClipboardList} from "react-icons/fa";
 
 const HamburgerMenu = () => {
   return (
@@ -15,17 +15,21 @@ const HamburgerMenu = () => {
       <div className="hamburger-wrapper">
         <ul>
           <div className={'hrefContainer'}>
+
             <a href={'/'}>
               <button style={{marginTop: '15vh'}}><AiOutlineHome className={'menu-icons'}/> 홈</button>
             </a> <br/>
-            <a href={'/loan'}>
-              <button className={'bottomBtn'}><ImBooks className={'menu-icons'}/> 도서 대출</button>
+            <a href={'/book-management'}>
+              <button className={'bottomBtn'}><BsBook className={'menu-icons'}/> 도서 관리</button>
             </a> <br/>
-            <a href={'/return'}>
-              <button className={'bottomBtn'}><IoReturnDownBack className={'menu-icons'}/> 도서 반납</button>
+            <a href={'/student-management'}>
+              <button className={'bottomBtn'}><MdManageAccounts className={'menu-icons'}/> 학생 관리</button>
             </a> <br/>
             <a href={'/register'}>
-              <button className={'bottomBtn'}><GiNotebook className={'menu-icons'}/> 희망도서 신청</button>
+              <button className={'bottomBtn'}><MdWatchLater className={'menu-icons'}/> 연채자 목록</button>
+            </a> <br/>
+            <a href={'/register'}>
+              <button className={'bottomBtn'}><FaClipboardList className={'menu-icons'}/> 희망도서 목록</button>
             </a> <br/>
             <a href={'/mypage'}>
               <button className={'bottomBtn'}><CgProfile className={'menu-icons'}/> 마이페이지</button>
