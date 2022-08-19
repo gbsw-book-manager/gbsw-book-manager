@@ -1,13 +1,15 @@
 import React, {ChangeEvent, useState} from "react";
 import PagesLogo from "../components/PagesLogo";
 import '../styles/Login.css'
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
+import qs from 'qs';
 
 const Login = () => {
   const [isIdFilled, setIsIdFilled] = useState<boolean>()
   const [isPasswordFilled, setIsPasswordFilled] = useState<boolean>()
   const [id, setId] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
   const loginHandler = () => {
     if (id !== '') {
@@ -22,26 +24,25 @@ const Login = () => {
       setIsPasswordFilled(false)
     }
     if (isIdFilled && isPasswordFilled) {
-      let data = {
-        'username': id,
-        'password': password
-      }
-
-      fetch('/api/login',
-        {
-          method: "POST",
-          body: `username=${id}&password=${password}`,
-
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          }
-        }
-      ).then(response => response.json())
-        .then(res => {
-          console.log(res)
+      // const url = "http://localhost:8080/api/login"
+      axios({
+        method: "post",
+        url: "http://localhost:8080/api/login",
+        data: qs.stringify({
+          username: id,
+          password: password,
+        }),
+        responseType: 'json',
+        headers: {
+          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+        },
+      })
+        .then((res) => {
+          setIsLoggedIn(true)
+          window.location.replace('/')
         })
         .catch((err) => {
-          console.log(err)
+          alert('아이디 또는 비밀번호가 일치하지 않습니다.')
         })
     }
   }
