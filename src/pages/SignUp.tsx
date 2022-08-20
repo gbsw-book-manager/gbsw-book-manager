@@ -4,15 +4,13 @@ import axios, {AxiosResponse} from "axios"
 
 const SignUp = () => {
   const [isEmailOkay, setIsEmailOkay] = useState<any>(null)
-  const email_format = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+  const email_format = /^([0-9a-zA-Z_.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
   const [name, setName] = useState<string>('')
   const [studentId, setStudentId] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [code, setCode] = useState<string>('')
   const [clicked, setClicked] = useState<boolean>(false)
-  const [isSigned, setIsSigned] = useState<boolean>(false)
-
 
   const checkStudentId = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = e.target
@@ -69,7 +67,6 @@ const SignUp = () => {
         },
       })
       .then((res: AxiosResponse<any>) => {
-        setIsSigned(true)
         alert('회원가입이 완료되었습니다.')
         window.location.replace('/')
       });

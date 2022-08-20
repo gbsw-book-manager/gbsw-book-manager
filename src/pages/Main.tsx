@@ -8,13 +8,34 @@ import MainLogo from "../components/MainLogo"
 import Buttons from "../components/Buttons"
 
 const Main = () => {
+
+  let user = JSON.parse(localStorage.getItem('user') || '{}')
+  console.log(user.access_token)
+
+  const logout = () => {
+    localStorage.removeItem('user')
+    window.location.replace('/')
+  }
+
   return (
     <div>
       <MainLogo/>
       <div className='logoTitle'>Gbsw Book Manager</div>
       <br/>
 
-      <Buttons/>
+      {
+        user.access_token === undefined && (
+          <Buttons/>
+        )
+      }
+
+      {
+        user.access_token != null && (
+          <div>{user.access_token}
+            <button onClick={logout}>로그아웃</button>
+          </div>
+        )
+      }
 
       <div className="container">
 

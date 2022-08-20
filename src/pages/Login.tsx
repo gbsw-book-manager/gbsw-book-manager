@@ -9,7 +9,6 @@ const Login = () => {
   const [isPasswordFilled, setIsPasswordFilled] = useState<boolean>()
   const [id, setId] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
   const loginHandler = () => {
     if (id !== '') {
@@ -24,7 +23,6 @@ const Login = () => {
       setIsPasswordFilled(false)
     }
     if (isIdFilled && isPasswordFilled) {
-      // const url = "http://localhost:8080/api/login"
       axios({
         method: "post",
         url: "http://localhost:8080/api/login",
@@ -38,7 +36,9 @@ const Login = () => {
         },
       })
         .then((res) => {
-          setIsLoggedIn(true)
+          localStorage.setItem('user', JSON.stringify({
+            'access_token' :res.data.access_token
+          }))
           window.location.replace('/')
         })
         .catch((err) => {
