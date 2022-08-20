@@ -1,3 +1,21 @@
+@font-face {
+  font-family: 'Arita-dotum-Medium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.loginContainer {
+  margin-top: 30px;
+  width: 415px;
+  height: 140px;
+  /*border: 1px solid #000;*/
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 .statusBar {
   text-decoration: none;
   margin-top: 10px;;
@@ -114,4 +132,31 @@ section {
     margin-top: 2vh;
     text-align: center;
   }
+}
+
+.welcomePhrase {
+  margin-top: 20px;
+  text-align: center;
+  font-family: 'Arita-dotum-Medium';
+  font-size: 20px;
+}
+
+.logoutBtn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'SUIT-Medium';
+  font-weight: bold;
+  margin-top: 10px;
+  width: 80px;
+  height: 30px;
+  background: #c51a0a;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.logoutBtn:hover {
+  cursor: pointer;
+  background-color: #ab1709;
 }

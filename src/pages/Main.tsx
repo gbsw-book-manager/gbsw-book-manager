@@ -10,11 +10,14 @@ import Buttons from "../components/Buttons"
 const Main = () => {
 
   let user = JSON.parse(localStorage.getItem('user') || '{}')
-  console.log(user.access_token)
 
   const logout = () => {
-    localStorage.removeItem('user')
-    window.location.replace('/')
+    let returnValue = window.confirm('정말로 로그아웃 하시겠습니까?')
+
+    if(returnValue) {
+      localStorage.removeItem('user')
+      window.location.replace('/')
+    }
   }
 
   return (
@@ -31,8 +34,9 @@ const Main = () => {
 
       {
         user.access_token != null && (
-          <div>{user.access_token}
-            <button onClick={logout}>로그아웃</button>
+          <div>
+            <div className={'welcomePhrase'}>{user.name}님, 반갑습니다 !</div>
+            <button onClick={logout} className={'logoutBtn'}>Logout</button>
           </div>
         )
       }

@@ -6,6 +6,7 @@ import '../../styles/Table.css'
 import Loading from "../../components/Loading";
 
 const ReturnDesktop = () => {
+  const username = JSON.parse(localStorage.getItem('user') || '{}').name
   const [checkedInputs, setCheckedInputs] = useState([]);
 
   const {data, error} = useSWR('http://localhost:8080/api/book', fetcher)
@@ -34,7 +35,7 @@ const ReturnDesktop = () => {
             </div>
             <div className={'divider'}></div>
             <div className={'tableContainer'}>
-              <div>ooo님의 대출 도서 수 : {data.length}</div>
+              <div>{username}님의 대출 도서 수 : {data.length}</div>
               <table className={'mainTable'}>
                 <thead>
                 <tr>
