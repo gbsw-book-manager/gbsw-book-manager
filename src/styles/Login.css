@@ -90,6 +90,15 @@
     color: #007AFE;
 }
 
+.signUpContainer {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 415px;
+    height: 420px;
+    border: none;
+}
+
 @media (max-width: 900px) {
     .form {
         width: 80vw;

@@ -30,7 +30,7 @@
 
 .passwordChangeContainer {
     width: 314px;
-    height: 155px;
+    height: 200px;
     /*border: 1px solid #000;*/
 }
 
@@ -56,4 +56,11 @@
 .confirmBtn:hover {
     background: #5e9cce;
     cursor: pointer;
+}
+
+.alertMessage {
+    margin-left: 123px;
+    margin-top: 3px;
+    font-size: 9px;
+    color: #d72020;
 }
