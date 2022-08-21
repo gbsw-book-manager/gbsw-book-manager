@@ -6,8 +6,12 @@ import registerImage from '../images/register.png'
 import profileImage from '../images/profile.png'
 import MainLogo from "../components/MainLogo"
 import Buttons from "../components/Buttons"
+import {useSelector} from "react-redux";
 
 const Main = () => {
+
+  const value = useSelector(state => state)
+  console.log(value)
 
   let user = JSON.parse(localStorage.getItem('user') || '{}')
 
@@ -19,6 +23,9 @@ const Main = () => {
       window.location.replace('/')
     }
   }
+
+
+
 
   return (
     <div>

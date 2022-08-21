@@ -3,6 +3,8 @@ import PagesLogo from "../components/PagesLogo";
 import '../styles/Login.css'
 import axios from "axios";
 import qs from 'qs';
+import jwt_decode from "jwt-decode";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const [isIdFilled, setIsIdFilled] = useState<boolean>()
@@ -10,6 +12,7 @@ const Login = () => {
   const [id, setId] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [login, setLogin] = useState<boolean>(true)
+  const dispatch = useDispatch()
 
   const loginHandler = () => {
     if (id !== '') {
@@ -37,7 +40,15 @@ const Login = () => {
         },
       })
         .then((res) => {
-          console.log(res.data)
+          let decoded: any = jwt_decode(res.data.access_token)
+          decoded = decoded.roles
+
+          console.log(decoded.includes('ROLE_ADMIN'))
+
+          if (decoded.includes('ROLE_ADMIN')) {
+            dispatch({type: 'admin'})
+          }
+
           localStorage.setItem('user', JSON.stringify({
             'access_token': res.data.access_token,
             'studentId': res.data.studentId,
