@@ -6,8 +6,11 @@ import fetcher from "../../utils/fetcher";
 import Loading from "../../components/Loading";
 import {BsTrash} from 'react-icons/bs'
 import {AiFillEdit} from 'react-icons/ai'
+import TextField from '@mui/material/TextField';
 
 const BookManagementDesktop = () => {
+  const ariaLabel = {'aria-label': 'description'};
+  const [showEditBox, setShowEditBox] = useState<boolean>(false)
   const {data, error} = useSWR('http://localhost:8080/api/book', fetcher)
 
   const deleteItem = (e: any) => {
@@ -38,7 +41,7 @@ const BookManagementDesktop = () => {
               <a href={'/book-management'} style={{color: '#000'}}> 도서 관리</a>
               <div className={'divider'}></div>
 
-              <div className={'tableContainer'}>
+              <div className={'tableContainer'} style={{height: '480px'}}>
                 <table className={'mainTable'}>
 
                   <thead>
@@ -61,11 +64,13 @@ const BookManagementDesktop = () => {
                       <td>{log.quantity}</td>
                       <td>{log.quantityleft}</td>
                       <td>
-                        <button id={log.id} onClick={deleteItem} className={'deleteBtn'}><BsTrash
-                          style={{marginBottom: '-3px'}}/><span style={{marginLeft: '2px'}}>삭제</span></button>
-                        <button id={log.id} className={'editBtn'}><AiFillEdit
-                          style={{marginBottom: '-3px'}}/>
-                          <span style={{marginLeft: '2px'}}>수정</span></button>
+                        <button id={log.id} onClick={deleteItem} className={'deleteBtn'}>
+                          <BsTrash style={{marginBottom: '-3px'}}/>
+                          <span style={{marginLeft: '2px'}}>삭제</span>
+                        </button>
+                        <button id={log.id} className={'editBtn'}>
+                          <AiFillEdit style={{marginBottom: '-3px'}}/>
+                          <span style={{marginLeft: '2px'}} onClick={() => setShowEditBox(true)}>수정</span></button>
                       </td>
                     </tr>
                   ))}
@@ -73,6 +78,63 @@ const BookManagementDesktop = () => {
                 </table>
               </div>
             </div>
+            {
+              showEditBox === true && (
+                <div className={'editBox'}>
+                  <br/><br/><br/>
+                  <div className={'editTextFieldContainer'}>
+                    <TextField
+                      id="standard-textarea"
+                      label="제목"
+                      placeholder="title"
+                      multiline
+                      variant="standard"
+                    />
+
+                    <TextField
+                      style={{marginLeft: '45px'}}
+                      id="standard-textarea"
+                      label="Multiline Placeholder"
+                      placeholder="Placeholder"
+                      multiline
+                      variant="standard"
+                    />
+
+                    <TextField
+                      style={{marginLeft: '45px'}}
+                      id="standard-textarea"
+                      label="Multiline Placeholder"
+                      placeholder="Placeholder"
+                      multiline
+                      variant="standard"
+                    />
+
+                    <TextField
+                      style={{marginLeft: '45px', width: '65px'}}
+                      id="standard-textarea"
+                      label="총 수량"
+                      placeholder="99"
+                      multiline
+                      variant="standard"
+                    />
+
+                    <TextField
+                      style={{marginLeft: '45px', width: '65px'}}
+                      id="standard-textarea"
+                      label="남은 수량"
+                      placeholder="99"
+                      multiline
+                      variant="standard"
+                    />
+                  </div>
+                  <br/><br/>
+                  <div className={'editBtnContainer'}>
+                    <button>취소</button>
+                    <button>수정</button>
+                  </div>
+                </div>
+              )
+            }
           </main>
         </div>
       </div>
