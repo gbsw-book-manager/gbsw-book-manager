@@ -2,7 +2,7 @@ import React from "react"
 import './SideBar.css'
 import PagesLogo from "./PagesLogo"
 import { AiOutlineHome } from 'react-icons/ai'
-import { BsBook } from "react-icons/bs";
+import { BsBook, BsJournalPlus } from "react-icons/bs";
 import { MdManageAccounts, MdWatchLater } from 'react-icons/md'
 import { FaClipboardList } from 'react-icons/fa'
 import { CgProfile } from 'react-icons/cg'
@@ -18,6 +18,7 @@ const SideBar = () => {
 
         <nav className="menu">
           <a href="/" className="menu-item"> <AiOutlineHome className={'menu-icons'}/> <span>홈</span></a>
+          <a href="/book-add" className='menu-item'> <BsJournalPlus className={'menu-icons'}/> <span>도서 추가</span> </a>
           <a href="/book-management" className="menu-item"><BsBook className={'menu-icons'}/> <span>도서 관리</span></a>
           <a href="/student-management" className="menu-item"><MdManageAccounts className={'menu-icons'}/> <span>학생 관리</span></a>
           <a href="/overdue-list" className="menu-item"><MdWatchLater className={'menu-icons'}/> <span>연채자 목록</span></a>

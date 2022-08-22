@@ -1,0 +1,70 @@
+.addBookForm {
+    width: 400px;
+}
+
+.addBookFormContainer {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 13%;
+    height: 423px;
+    width: 400px;
+    /*border: 1px solid #000;*/
+}
+
+.gap {
+    margin-top: 15px;
+}
+
+.addBookFormContainer button {
+    border: none;
+    margin-top: 35px;
+    width: 100px;
+    height: 35px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 3px;
+}
+
+.addBookBtnNotActive {
+    background-color: #ccc;
+}
+
+.addBookBtnActive {
+    background-color: #2d80ea;
+    color: #fff;
+}
+
+.addBookBtnActive:hover {
+    background-color: #256ac2;
+    cursor: pointer;
+}
+
+.deleteBtn {
+    background: #d92312;
+    color: #fff;
+    border: none;
+    width: 50px;
+    height: 23px;
+    border-radius: 3px;
+}
+
+.deleteBtn:hover {
+    cursor: pointer;
+    background: #b71e10;
+}
+
+.editBtn {
+    margin-left: 6px;
+    background: #2d80ea;
+    color: #fff;
+    border: none;
+    width: 50px;
+    height: 23px;
+    border-radius: 3px;
+}
+
+.editBtn:hover {
+    background: #2366bb;
+    cursor: pointer;
+}

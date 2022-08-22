@@ -24,9 +24,6 @@ const Main = () => {
     }
   }
 
-
-
-
   return (
     <div>
       <MainLogo/>

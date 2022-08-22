@@ -1,162 +1,161 @@
 @font-face {
-  font-family: 'Arita-dotum-Medium';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Arita-dotum-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 
 .loginContainer {
-  margin-top: 30px;
-  width: 415px;
-  height: 140px;
-  /*border: 1px solid #000;*/
-  margin-left: auto;
-  margin-right: auto;
+    margin-top: 30px;
+    width: 415px;
+    height: 140px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-
 .statusBar {
-  text-decoration: none;
-  margin-top: 10px;;
+    text-decoration: none;
+    margin-top: 10px;
 }
 
 section {
-  background: cornflowerblue;
+    background: cornflowerblue;
 }
 
 .divider {
-  border: 1px solid #aaa;
-  width: 100%;
-  margin-top: 10px;
+    border: 1px solid #aaa;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .container {
-  margin-top: 2rem;
-  height: 440px;
-  width: 440px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.divSquare{
-  width:200px;
-  height:200px;
-  margin:10px;
-  float: left;
-  border-radius: 5px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-.icons {
-  margin-top: 3vh;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 110px;
-}
-
-.description {
-  font-size: 18px;
-  margin-top: 2vh;
-  text-align: center;
-}
-
-.returnBox:hover {
-  background: #DC6A5E;
-  color: #fff;
-}
-
-.returnBox:hover > .returnIcon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7476%) hue-rotate(110deg) brightness(98%) contrast(108%);
-}
-
-.loanBox:hover {
-  background: #007AFE;
-  color: #fff;
-}
-
-.loanBox:hover > .loanIcon{
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7476%) hue-rotate(110deg) brightness(98%) contrast(108%);
-}
-
-.registerBox:hover {
-  background: #000;
-  color: #fff;
-}
-
-.registerBox:hover > .registerIcon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7476%) hue-rotate(110deg) brightness(98%) contrast(108%);
-}
-
-.profileIcon {
-  filter: invert(51%) sepia(77%) saturate(477%) hue-rotate(79deg) brightness(92%) contrast(90%);
-}
-
-.mypageBox:hover {
-  background: #28ad40;
-  color: #fff;
-}
-
-.mypageBox:hover > .profileIcon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7476%) hue-rotate(110deg) brightness(98%) contrast(108%);
-}
-
-@media (max-width: 900px) {
-  .container {
-    margin-top: 7vh;
-    height: 340px;
-    width: 340px;
+    margin-top: 2rem;
+    height: 440px;
+    width: 440px;
     margin-left: auto;
     margin-right: auto;
-  }
+}
 
-  .divSquare{
-    width:150px;
-    height:150px;
-    margin:10px;
+.divSquare {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
     float: left;
     border-radius: 5px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  }
+}
 
-  .icons {
-    margin-top: 2vh;
+.icons {
+    margin-top: 3vh;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 85px;
-  }
+    width: 110px;
+}
 
-  .description {
-    font-size: 15px;
+.description {
+    font-size: 18px;
     margin-top: 2vh;
     text-align: center;
-  }
+}
+
+.returnBox:hover {
+    background: #DC6A5E;
+    color: #fff;
+}
+
+.returnBox:hover > .returnIcon {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7476%) hue-rotate(110deg) brightness(98%) contrast(108%);
+}
+
+.loanBox:hover {
+    background: #007AFE;
+    color: #fff;
+}
+
+.loanBox:hover > .loanIcon {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7476%) hue-rotate(110deg) brightness(98%) contrast(108%);
+}
+
+.registerBox:hover {
+    background: #000;
+    color: #fff;
+}
+
+.registerBox:hover > .registerIcon {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7476%) hue-rotate(110deg) brightness(98%) contrast(108%);
+}
+
+.profileIcon {
+    filter: invert(51%) sepia(77%) saturate(477%) hue-rotate(79deg) brightness(92%) contrast(90%);
+}
+
+.mypageBox:hover {
+    background: #28ad40;
+    color: #fff;
+}
+
+.mypageBox:hover > .profileIcon {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7476%) hue-rotate(110deg) brightness(98%) contrast(108%);
+}
+
+@media (max-width: 900px) {
+    .container {
+        margin-top: 7vh;
+        height: 340px;
+        width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .divSquare {
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+        float: left;
+        border-radius: 5px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+
+    .icons {
+        margin-top: 2vh;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 85px;
+    }
+
+    .description {
+        font-size: 15px;
+        margin-top: 2vh;
+        text-align: center;
+    }
 }
 
 .welcomePhrase {
-  margin-top: 20px;
-  text-align: center;
-  font-family: 'Arita-dotum-Medium';
-  font-size: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Arita-dotum-Medium';
+    font-size: 20px;
 }
 
 .logoutBtn {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: 'SUIT-Medium';
-  font-weight: bold;
-  margin-top: 10px;
-  width: 80px;
-  height: 30px;
-  background: #c51a0a;
-  border: none;
-  color: #fff;
-  border-radius: 4px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'SUIT-Medium';
+    font-weight: bold;
+    margin-top: 10px;
+    width: 80px;
+    height: 30px;
+    background: #c51a0a;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
 }
 
 .logoutBtn:hover {
-  cursor: pointer;
-  background-color: #ab1709;
+    cursor: pointer;
+    background-color: #ab1709;
 }
