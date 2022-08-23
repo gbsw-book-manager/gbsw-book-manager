@@ -81,12 +81,44 @@
 .editTextFieldContainer {
     margin-left: auto;
     margin-right: auto;
-    width: 68.3%;
+    width: 100%;
     height: 50px;
+    max-width: 790px;
 }
 
 .editBtnContainer {
-    width: 100px;
+    width: 110px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.number-textarea {
+    width: 65px;
+}
+
+.editBtnContainer button {
+    width: 50px;
+    height: 30px;
+    border-radius: 3px;
+    border: none;
+    color: #fff;
+}
+
+.editBtnContainer .btn1 {
+    background: #75d0e8;
+}
+
+.editBtnContainer .btn2 {
+    margin-left: 10px;
+    background: #7e28e0;
+}
+
+.editBtnContainer .btn1:hover {
+    background: #60abbe;
+    cursor: pointer;
+}
+
+.editBtnContainer .btn2:hover {
+    cursor: pointer;
+    background: #592296;
 }

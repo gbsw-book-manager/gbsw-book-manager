@@ -116,3 +116,6 @@
     color: #707793;
 }
 
+.adminLogout:hover {
+    cursor: pointer;
+}

@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import SideBar from "../../components/SideBar";
 import '../../styles/MyPage.css'
+import jwt_decode from "jwt-decode";
+import AdminSideBar from "../../components/AdminSideBar";
 
 const MyPageDesktop = () => {
   const [currentPassword, setCurrentPassword] = useState<string>('')
@@ -11,7 +13,19 @@ const MyPageDesktop = () => {
   const [newPasswordOverFour, setNewPasswordOverFour] = useState<boolean>(true)
   const [passwordIsEqual, setPasswordIsEqual] = useState<boolean>(true)
 
+  const [isAdmin, setIsAdmin] = useState<boolean>(false)
+
   let user = JSON.parse(localStorage.getItem('user') || '{}')
+
+  useEffect(() => {
+    if (user.access_token !== undefined) {
+      let decoded: any = jwt_decode(user.access_token)
+      decoded = decoded.roles
+      if (decoded.includes('ROLE_ADMIN')) {
+        setIsAdmin(true)
+      }
+    }
+  }, [])
 
   const changePassword = () => {
     if (currentPassword.length === 0) {
@@ -31,7 +45,17 @@ const MyPageDesktop = () => {
   return (
     <div>
       <div className={'app'}>
-        <SideBar/>
+        {
+          isAdmin === true && (
+            <AdminSideBar/>
+          )
+        }
+
+        {
+          isAdmin === false && (
+            <SideBar/>
+          )
+        }
         <main className="content">
           <div className={'statusBar'}>
             <a href={'/'} style={{color: '#999'}}>홈</a> {'>'}
