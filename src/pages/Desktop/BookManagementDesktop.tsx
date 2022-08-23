@@ -4,16 +4,29 @@ import '../../styles/AdminPage.css'
 import useSWR from "swr";
 import fetcher from "../../utils/fetcher";
 import Loading from "../../components/Loading";
-import {BsTrash} from 'react-icons/bs'
-import {AiFillEdit} from 'react-icons/ai'
+import { BsTrash } from 'react-icons/bs'
+import { AiFillEdit } from 'react-icons/ai'
 import TextField from '@mui/material/TextField';
 import jwt_decode from "jwt-decode";
 import NotFound from "../NotFound";
+import axios, { AxiosResponse } from "axios";
 
 const BookManagementDesktop = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
+  const [editId, setEditId] = useState<number>(0)
+  const [placeHolderTitle, setPlaceHolderTitle] = useState<string>('')
+  const [placeHolderAuthor, setPlaceHolderAuthor] = useState<string>('')
+  const [placeHolderPublisher, setPlaceHolderPublisher] = useState<string>('')
+  const [placeHolderQuantity, setPlaceHolderQuantity] = useState<string>('')
+  const [placeHolderQuantityLeft, setPlaceHolderQuantityLeft] = useState<string>('')
 
-  let user = JSON.parse(localStorage.getItem('user') || '{}')
+  const [title, setTitle] = useState<string>('')
+  const [author, setAuthor] = useState<string>('')
+  const [publisher, setPublisher] = useState<string>('')
+  const [quantity, setQuantity] = useState<string>('')
+  const [quantityLeft, setQuantityLeft] = useState<string>('')
+
+  const user = JSON.parse(localStorage.getItem('user') || '{}')
 
   useEffect(() => {
     if (user.access_token !== undefined) {
@@ -25,7 +38,6 @@ const BookManagementDesktop = () => {
     }
   }, [])
 
-  const ariaLabel = {'aria-label': 'description'};
   const [showEditBox, setShowEditBox] = useState<boolean>(false)
   const {data, error} = useSWR('http://localhost:8080/api/book', fetcher)
 
@@ -35,10 +47,36 @@ const BookManagementDesktop = () => {
 
     if (isTrue) {
       fetch(`http://localhost:8080/api/book?id=${valueId}`, {method: 'DELETE'})
-        .then(() => {
+        .then((res) => {
+          console.log(res)
           alert('삭제되었습니다.')
-          window.location.reload()
+          // window.location.reload()
         })
+    }
+  }
+
+  const edit = () => {
+    let value = window.confirm(`'${placeHolderTitle}' 도서를 수정하시겠습니까?`)
+
+    if (value) {
+      let data = {
+        "id": editId,
+        "title": title,
+        "author": author,
+        "publisher": publisher,
+        "quantity": Number(quantity),
+        "quantityleft": Number(quantityLeft)
+      }
+      axios
+        .put('http://localhost:8080/api/book', JSON.stringify(data), {
+          headers: {
+            "Content-Type": `application/json`,
+          },
+        })
+        .then((res: AxiosResponse<any>) => {
+          alert('수정이 완료되었습니다.')
+          window.location.reload()
+        });
     }
   }
 
@@ -73,8 +111,8 @@ const BookManagementDesktop = () => {
                     </thead>
 
                     <tbody>
-                    {Object.values(data).map((log: any) => (
-                      <tr key={1}>
+                    {Object.values(data).map((log: any, index) => (
+                      <tr key={index}>
                         <td>{log.title}</td>
                         <td>{log.author}</td>
                         <td>{log.publisher}</td>
@@ -85,9 +123,17 @@ const BookManagementDesktop = () => {
                             <BsTrash style={{marginBottom: '-3px'}}/>
                             <span style={{marginLeft: '2px'}}>삭제</span>
                           </button>
-                          <button id={log.id} className={'editBtn'}>
+                          <button id={log.id} name={log.id} className={'editBtn'} onClick={async () => {
+                            setEditId(log.id)
+                            setPlaceHolderTitle(log.title)
+                            setPlaceHolderAuthor(log.author)
+                            setPlaceHolderPublisher(log.publisher)
+                            setPlaceHolderQuantity(log.quantity)
+                            setPlaceHolderQuantityLeft(log.quantityleft)
+                            setShowEditBox(true)
+                          }}>
                             <AiFillEdit style={{marginBottom: '-3px'}}/>
-                            <span style={{marginLeft: '2px'}} onClick={() => setShowEditBox(true)}>수정</span></button>
+                            <span style={{marginLeft: '2px'}}>수정</span></button>
                         </td>
                       </tr>
                     ))}
@@ -104,55 +150,65 @@ const BookManagementDesktop = () => {
                         className={'standard-textarea'}
                         id="standard-textarea"
                         label="제목"
-                        placeholder="title"
+                        value={title}
+                        placeholder={placeHolderTitle}
                         multiline
+                        onChange={(e) => setTitle(e.target.value)}
                         variant="standard"
                       />
 
                       <TextField
-                        style={{ marginLeft: '40px' }}
+                        style={{marginLeft: '40px'}}
                         className={'standard-textarea edit-textarea'}
                         id="standard-textarea"
                         label="저자"
-                        placeholder="Placeholder"
+                        value={author}
+                        placeholder={placeHolderAuthor}
                         multiline
+                        onChange={(e) => setAuthor(e.target.value)}
                         variant="standard"
                       />
 
                       <TextField
-                        style={{ marginLeft: '40px' }}
+                        style={{marginLeft: '40px'}}
                         className={'standard-textarea edit-textarea'}
                         id="standard-textarea"
                         label="출판사"
-                        placeholder="Placeholder"
+                        value={publisher}
+                        placeholder={placeHolderPublisher}
                         multiline
+                        onChange={(e) => setPublisher(e.target.value)}
                         variant="standard"
                       />
 
                       <TextField
-                        style={{ marginLeft: '40px' }}
+                        style={{marginLeft: '40px'}}
                         className={'number-textarea edit-textarea'}
                         id="standard-textarea"
                         label="총 수량"
-                        placeholder="99"
+                        value={quantity}
+                        placeholder={placeHolderQuantity}
                         multiline
+                        onChange={(e) => setQuantity(e.target.value)}
                         variant="standard"
                       />
 
                       <TextField
-                        style={{ marginLeft: '40px' }}
+                        style={{marginLeft: '40px'}}
                         className={'number-textarea edit-textarea'}
                         id="standard-textarea"
                         label="남은 수량"
-                        placeholder="99"
+                        value={quantityLeft}
+                        placeholder={placeHolderQuantityLeft}
                         multiline
+                        onChange={(e) => setQuantityLeft(e.target.value)}
                         variant="standard"
                       />
                     </div>
                     <br/><br/>
                     <div className={'editBtnContainer'}>
                       <button onClick={() => setShowEditBox(false)} className={'btn1'}>취소</button>
-                      <button className={'btn2'}>수정</button>
+                      <button className={'btn2'} onClick={edit}>수정</button>
                     </div>
                   </div>
                 )
