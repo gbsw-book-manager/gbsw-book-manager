@@ -24,6 +24,7 @@ section {
 
 .divider {
     border: 1px solid #aaa;
+    background: #aaa;
     width: 100%;
     margin-top: 10px;
 }

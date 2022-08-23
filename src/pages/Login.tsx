@@ -4,18 +4,25 @@ import '../styles/Login.css'
 import axios from "axios";
 import qs from 'qs';
 import jwt_decode from "jwt-decode";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector, useAppDispatch } from '../redux/hooks'
+import {isAdmin} from "../redux/counterSlice";
+import { connect } from 'react-redux'
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const count = useAppSelector(state => state.counter.value)
+  const dispatch = useAppDispatch()
+
   const [isIdFilled, setIsIdFilled] = useState<boolean>()
   const [isPasswordFilled, setIsPasswordFilled] = useState<boolean>()
   const [id, setId] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [login, setLogin] = useState<boolean>(true)
-  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const loginHandler = () => {
-    if (id !== '') {
+
+  if (id !== '') {
       setIsIdFilled(true)
     } else {
       setIsIdFilled(false)
@@ -43,10 +50,8 @@ const Login = () => {
           let decoded: any = jwt_decode(res.data.access_token)
           decoded = decoded.roles
 
-          console.log(decoded.includes('ROLE_ADMIN'))
-
           if (decoded.includes('ROLE_ADMIN')) {
-            dispatch({type: 'admin'})
+            dispatch(isAdmin())
           }
 
           localStorage.setItem('user', JSON.stringify({
@@ -55,7 +60,7 @@ const Login = () => {
             'name': res.data.name,
             'email': res.data.username
           }))
-          window.location.replace('/')
+          navigate('/')
         })
         .catch((err) => {
           setLogin(false)
@@ -119,4 +124,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default connect()(Login)

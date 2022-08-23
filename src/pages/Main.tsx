@@ -6,12 +6,11 @@ import registerImage from '../images/register.png'
 import profileImage from '../images/profile.png'
 import MainLogo from "../components/MainLogo"
 import Buttons from "../components/Buttons"
-import {useSelector} from "react-redux";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 const Main = () => {
-
-  const value = useSelector(state => state)
-  console.log(value)
+  const count = useAppSelector(state => state.counter.value)
+  console.log(count)
 
   let user = JSON.parse(localStorage.getItem('user') || '{}')
 
