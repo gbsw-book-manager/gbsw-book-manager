@@ -66,7 +66,7 @@ const LoanDesktop = () => {
                 </tbody>
               </table>
             </div>
-            <button className={checkedInputs.length === 0 ? 'btnNotActive' : 'loanBtnActive'} id={'dynamicBtn'}>대출하기</button>
+            <button className={checkedInputs.length === 0 ? 'btnNotActive' : 'loanBtnActive'} id={'dynamicBtn'}>대출 신청</button>
           </main>
         </div>
       </div>

@@ -6,6 +6,15 @@ import TextField from "@mui/material/TextField";
 
 const RegisterDesktop = () => {
   const [isTitleFilled, setIsTitleFilled] = useState<boolean>(false)
+  const [studentId, setStudentId] = useState<string>('')
+  const [title, setTitle] = useState<string>('')
+  const [url, setUrl] = useState<string>('')
+
+  const loadData = () => {
+    let data = {
+
+    }
+  }
 
   const checkLength = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length !== 0) {
@@ -35,8 +44,7 @@ const RegisterDesktop = () => {
                 helperText="책 제목을 입력하세요."
                 id="demo-helper-text-aligned"
                 label="Title"
-                // onChange={(e) => setTitle(e.target.value)}
-                // className={'addBookForm'}
+                onChange={(e) => setTitle(e.target.value)}
               />
 
               <div className={'gap'}/>

@@ -14,6 +14,7 @@ import axios, { AxiosResponse } from "axios";
 const BookManagementDesktop = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
   const [editId, setEditId] = useState<number>(0)
+  const [deleteId, setDeleteId] = useState<string>('')
   const [placeHolderTitle, setPlaceHolderTitle] = useState<string>('')
   const [placeHolderAuthor, setPlaceHolderAuthor] = useState<string>('')
   const [placeHolderPublisher, setPlaceHolderPublisher] = useState<string>('')
@@ -28,6 +29,19 @@ const BookManagementDesktop = () => {
 
   const user = JSON.parse(localStorage.getItem('user') || '{}')
 
+  const checkQuantityOnlyNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {value} = e.target
+    const onlyNumber = value.replace(/[^0-9]/g, '')
+    setQuantity(onlyNumber)
+  }
+
+  const checkQuantityLeftOnlyNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {value} = e.target
+    const onlyNumber = value.replace(/[^0-9]/g, '')
+    setQuantityLeft(onlyNumber)
+  }
+
+
   useEffect(() => {
     if (user.access_token !== undefined) {
       let decoded: any = jwt_decode(user.access_token)
@@ -41,31 +55,50 @@ const BookManagementDesktop = () => {
   const [showEditBox, setShowEditBox] = useState<boolean>(false)
   const {data, error} = useSWR('http://localhost:8080/api/book', fetcher)
 
-  const deleteItem = (e: any) => {
-    let valueId = e.target.id
+  const deleteItem = (id: string) => {
     let isTrue = window.confirm('정말로 삭제하시겠습니까?')
 
     if (isTrue) {
-      fetch(`http://localhost:8080/api/book?id=${valueId}`, {method: 'DELETE'})
+      axios
+        .delete(`http://localhost:8080/api/book?id=${id}`)
         .then((res) => {
-          console.log(res)
-          alert('삭제되었습니다.')
-          // window.location.reload()
+          if (res.data.length === 0) {
+            alert('삭제가 완료되었습니다.')
+            window.location.reload()
+          } else {
+            let str: any = ''
+            for (let i in res.data) {
+              str += `${res.data[i]}, `
+            }
+
+            str = str.slice(0, -1);
+            str = str.slice(0, -1);
+
+            alert(str + ' 님이 도서를 대출중이여서 삭제 할 수 없습니다.')
+          }
         })
     }
   }
 
   const edit = () => {
     let value = window.confirm(`'${placeHolderTitle}' 도서를 수정하시겠습니까?`)
+    let compare = true
+    if (quantity < quantityLeft) {
+      compare = false
+    }
 
-    if (value) {
+    if (!compare) {
+      alert('남은수량이 총 수량보다 많습니다. 다시 확인해주세요.')
+    }
+
+    if (value && compare) {
       let data = {
         "id": editId,
-        "title": title,
-        "author": author,
-        "publisher": publisher,
-        "quantity": Number(quantity),
-        "quantityleft": Number(quantityLeft)
+        "title": title.length === 0 ? placeHolderTitle : title,
+        "author": author.length === 0 ? placeHolderAuthor : author,
+        "publisher": publisher.length === 0 ? placeHolderPublisher : publisher,
+        "quantity": Number(quantity) === 0 ? Number(placeHolderQuantity) : quantity,
+        "quantityleft": quantityLeft.length === 0 ? Number(placeHolderQuantityLeft) : quantityLeft
       }
       axios
         .put('http://localhost:8080/api/book', JSON.stringify(data), {
@@ -76,7 +109,7 @@ const BookManagementDesktop = () => {
         .then((res: AxiosResponse<any>) => {
           alert('수정이 완료되었습니다.')
           window.location.reload()
-        });
+        })
     }
   }
 
@@ -119,7 +152,10 @@ const BookManagementDesktop = () => {
                         <td>{log.quantity}</td>
                         <td>{log.quantityleft}</td>
                         <td>
-                          <button id={log.id} onClick={deleteItem} className={'deleteBtn'}>
+                          <button onClick={(e) => {
+                            setDeleteId(log.id)
+                            deleteItem(log.id)
+                          }} className={'deleteBtn'}>
                             <BsTrash style={{marginBottom: '-3px'}}/>
                             <span style={{marginLeft: '2px'}}>삭제</span>
                           </button>
@@ -189,7 +225,8 @@ const BookManagementDesktop = () => {
                         value={quantity}
                         placeholder={placeHolderQuantity}
                         multiline
-                        onChange={(e) => setQuantity(e.target.value)}
+                        onChange={checkQuantityOnlyNumber}
+                        inputProps={{ maxLength: 3 }}
                         variant="standard"
                       />
 
@@ -201,7 +238,8 @@ const BookManagementDesktop = () => {
                         value={quantityLeft}
                         placeholder={placeHolderQuantityLeft}
                         multiline
-                        onChange={(e) => setQuantityLeft(e.target.value)}
+                        onChange={checkQuantityLeftOnlyNumber}
+                        inputProps={{ maxLength: 3 }}
                         variant="standard"
                       />
                     </div>
@@ -218,7 +256,8 @@ const BookManagementDesktop = () => {
         </div>
       )
     }
-  } else {
+  }
+  else {
     return <NotFound/>
   }
 }
