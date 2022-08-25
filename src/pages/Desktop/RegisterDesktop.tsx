@@ -1,24 +1,42 @@
-import React, {ChangeEvent, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import SideBar from "../../components/SideBar"
 import Box from '@mui/material/Box';
 import '../../styles/Register.scss'
 import TextField from "@mui/material/TextField";
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const RegisterDesktop = () => {
-  const [isTitleFilled, setIsTitleFilled] = useState<boolean>(false)
-  const [studentId, setStudentId] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const [url, setUrl] = useState<string>('')
 
-  const loadData = () => {
-    let data = {
+  const user = JSON.parse(localStorage.getItem('user') || '{}')
 
-    }
-  }
+  const LoadData = () => {
+    if (title.length > 0 && url.length > 0) {
+      let data = {
+        'identifyId': user.id,
+        'applicant': user.name,
+        "title": title,
+        "url": url
+      }
 
-  const checkLength = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length !== 0) {
-      setIsTitleFilled(true)
+      axios
+        .post('http://localhost:8080/api/book/application', JSON.stringify(data), {
+          headers: {
+            "Content-Type": `application/json`,
+          },
+        })
+        .then((res) => {
+          Swal.fire({
+            title: 'Success',
+            text: '희망도서 신청이 완료되었습니다.',
+            icon: 'success',
+            confirmButtonText: '확인'
+          })
+          setTitle('')
+          setUrl('')
+        })
     }
   }
 
@@ -32,42 +50,55 @@ const RegisterDesktop = () => {
             <a href={'/register'} style={{color: '#000'}}> 희망도서 신청</a>
             <div className={'divider'}></div>
 
-            <Box
-              // className={'addBookFormContainer'}
-              // sx={{
-              //   display: 'flex',
-              //   alignItems: 'center',
-              //   '& > :not(style)': { m: 1 },
-              // }}
-            >
-              <TextField
-                helperText="책 제목을 입력하세요."
-                id="demo-helper-text-aligned"
-                label="Title"
-                onChange={(e) => setTitle(e.target.value)}
-              />
+            <Box>
 
-              <div className={'gap'}/>
+              <div className={'applicantForm'}>
 
-              <TextField
-                helperText="작가를 입력하세요."
-                id="demo-helper-text-aligned"
-                label="URL"
-                // onChange={(e) => setAuthor(e.target.value)}
-                // className={'addBookForm'}
-              />
+                <h1>희망도서 신청</h1>
 
-              <div className={'gap'}/>
+                <div style={{height: '70px', marginTop: '60px'}}>
+                  <TextField
+                    id="demo-helper-text-aligned"
+                    label="도서명"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className={'textfield'}
+                  />
 
-              <TextField
-                helperText="출판사를 입력하세요."
-                id="demo-helper-text-aligned"
-                label="Publisher"
-                // className={'addBookForm'}
-                // onChange={(e) => setPublisher(e.target.value)}
-              />
+                  {
+                    title.length === 0 && (
+                      <div className={'msg'}>
+                        도서명을 입력해주세요.
+                      </div>
+                    )
+                  }
+                </div>
 
-              <button>추가</button>
+                <div style={{height: '70px', marginTop: '25px'}}>
+                  <TextField
+                    id="demo-helper-text-aligned"
+                    label="URL"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    className={'textfield'}
+                  />
+
+                  {
+                    url.length === 0 && (
+                      <div className={'msg'}>
+                        URL을 입력해주세요.
+                      </div>
+                    )
+
+                  }
+                </div>
+
+                <div className={'gap'}/>
+
+                <button onClick={LoadData}
+                        className={title.length > 0 && url.length > 0 ? 'applicantBtnActive' : 'applicantBtnNotActive'}>신청
+                </button>
+              </div>
             </Box>
 
           </div>

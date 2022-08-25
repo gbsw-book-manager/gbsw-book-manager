@@ -12,6 +12,7 @@ import StudentManagement from "./pages/StudentManagement";
 import OverdueList from "./pages/OverdueList";
 import BookAdd from "./pages/BookAdd";
 import LoanRequestList from "./pages/LoanRequestList";
+import ApplicantList from "./pages/ApplicantList";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
       <Route path="/overdue-list" element={<OverdueList/>}/>
       <Route path='/book-add' element={<BookAdd/>} />
       <Route path='/loan-request' element={<LoanRequestList/>} />
+      <Route path='/applicant-list' element={ <ApplicantList/> } />
       <Route path={"*"} element={<NotFound />}/>
     </Routes>
   );

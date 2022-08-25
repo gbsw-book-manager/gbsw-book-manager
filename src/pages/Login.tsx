@@ -43,7 +43,8 @@ const Login = () => {
             'access_token': res.data.access_token,
             'studentId': res.data.studentId,
             'name': res.data.name,
-            'email': res.data.username
+            'email': res.data.username,
+            'id': res.data.id
           }))
           window.location.replace('/')
         })

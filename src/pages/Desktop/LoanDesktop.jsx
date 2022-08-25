@@ -39,7 +39,6 @@ const LoanDesktop = () => {
                 <thead>
                 <tr>
                   <th></th>
-                  <th>ID</th>
                   <th style={{width: '200px'}}>제목</th>
                   <th>저자</th>
                   <th>출판사</th>
@@ -55,7 +54,6 @@ const LoanDesktop = () => {
                       id={log.id} onChange={(e) => {checkEvent(e.currentTarget.checked, log.id)}}
                       checked={!checkedInputs.includes(log.id) ? false : true}/>
                     </td>
-                    <td>{log.id}</td>
                     <td>{log.title}</td>
                     <td>{log.author}</td>
                     <td>{log.publisher}</td>

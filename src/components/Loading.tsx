@@ -2,12 +2,7 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+    <h1 className={'loading'}>Loading...</h1>
   )
 }
 

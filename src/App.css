@@ -5,6 +5,8 @@
     font-style: normal;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
+
 .loginContainer {
     margin-top: 30px;
     width: 415px;
@@ -158,4 +160,10 @@ section {
 .logoutBtn:hover {
     cursor: pointer;
     background-color: #ab1709;
+}
+
+.loading {
+    font-family: 'Aboreto', cursive;
+    text-align: center;
+    margin-top: 50vh;
 }

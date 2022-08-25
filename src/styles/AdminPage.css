@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'LeferiPoint-WhiteObliqueA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .addBookForm {
     width: 400px;
 }
@@ -121,4 +128,54 @@
 .editBtnContainer .btn2:hover {
     cursor: pointer;
     background: #592296;
+}
+
+.applicantForm {
+    margin-top: 13%;
+    width: 400px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.applicantForm .textfield {
+   width: 400px;
+}
+
+.applicantForm .msg {
+    margin-top: 3px;
+    margin-left: 6px;
+    font-size: 13px;
+    color: #e82323;
+}
+
+.applicantForm h1 {
+    font-weight: bold;
+    font-family: 'LeferiPoint-WhiteObliqueA';
+    text-align: center;
+    font-size: 22px;
+}
+
+.applicantForm button {
+    width: 70px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.applicantBtnNotActive {
+    background: #ccc;
+}
+
+.applicantBtnActive {
+    background-color: #2a79e3;
+    color: #fff;
+}
+
+.applicantBtnActive:hover {
+    cursor: pointer;
 }

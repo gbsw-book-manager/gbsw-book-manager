@@ -32,7 +32,7 @@ const SideBar = () => {
           <a href="/loan-request" className="menu-item"><GiBookshelf className={'menu-icons'}/> <span>대출 신청 목록</span></a>
           <a href="/student-management" className="menu-item"><MdManageAccounts className={'menu-icons'}/> <span>학생 관리</span></a>
           <a href="/overdue-list" className="menu-item"><MdWatchLater className={'menu-icons'}/> <span>연채자 목록</span></a>
-          <a href="/register" className="menu-item"><FaClipboardList className={'menu-icons'}/> <span>희망도서 목록</span></a>
+          <a href="/applicant-list" className="menu-item"><FaClipboardList className={'menu-icons'}/> <span>희망도서 목록</span></a>
           <a href="/mypage" className="menu-item"><CgProfile className={'menu-icons'}/> <span>마이페이지</span></a>
           <br/>
           <div className="menu-item adminLogout" onClick={logoutHandler}> <FiLogOut className={'menu-icons'}/> <span>로그아웃</span></div>
