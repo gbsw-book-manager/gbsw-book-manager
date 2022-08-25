@@ -179,3 +179,32 @@
 .applicantBtnActive:hover {
     cursor: pointer;
 }
+
+.acceptBtn {
+    background: #1fb33f;
+    color: #fff;
+}
+
+.cancelBtn {
+    margin-left: 5px;
+    background: #e44922;
+    color: #fff;
+}
+
+.acceptBtn:hover {
+    background: #16812d;
+    cursor: pointer;
+}
+
+.cancelBtn:hover {
+    background: #b43a1b;
+    cursor: pointer;
+}
+
+
+.approvalBtn {
+    width: 55px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+}

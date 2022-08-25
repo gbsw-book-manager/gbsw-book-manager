@@ -4,9 +4,12 @@ import fetcher from "../../utils/fetcher";
 import useSWR from 'swr'
 import '../../styles/Table.css'
 import Loading from "../../components/Loading";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const LoanDesktop = () => {
   const [checkedInputs, setCheckedInputs] = useState([]);
+  const user = JSON.parse(localStorage.getItem('user') || '{}')
 
   const {data, error} = useSWR('http://localhost:8080/api/book', fetcher)
 
@@ -16,6 +19,30 @@ const LoanDesktop = () => {
     } else {
       setCheckedInputs(checkedInputs.filter((el) => el !== id));
     }
+  }
+
+  const loanBook = () => {
+    let data = {
+      "userId": user.id,
+      "bookId": checkedInputs
+    }
+
+    if (checkedInputs.length > 0) {
+      axios
+        .post('http://localhost:8080/api/book/loan', JSON.stringify(data), {
+          headers: {
+            "Content-Type": `application/json`,
+          },
+        }).then((res) => {
+        Swal.fire({
+          title: 'Success',
+          text: '도서 대출이 완료되었습니다. 관리자 승인 후 메일이 도착하면 실습실에서 대여하세요!',
+          icon: 'success',
+          confirmButtonText: '확인'
+        })
+      })
+    }
+
   }
 
 
@@ -47,12 +74,14 @@ const LoanDesktop = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {Object.values(data).map((log) => (
-                  <tr key={1}>
+                {Object.values(data).map((log, index) => (
+                  <tr key={index}>
                     <td className="checkbox-td">
                       <input type="checkbox" name={`${log.title}`} className="checkbox-box"
-                      id={log.id} onChange={(e) => {checkEvent(e.currentTarget.checked, log.id)}}
-                      checked={!checkedInputs.includes(log.id) ? false : true}/>
+                             id={log.id} onChange={(e) => {
+                        checkEvent(e.currentTarget.checked, log.id)
+                      }}
+                             checked={!checkedInputs.includes(log.id) ? false : true}/>
                     </td>
                     <td>{log.title}</td>
                     <td>{log.author}</td>
@@ -64,7 +93,9 @@ const LoanDesktop = () => {
                 </tbody>
               </table>
             </div>
-            <button className={checkedInputs.length === 0 ? 'btnNotActive' : 'loanBtnActive'} id={'dynamicBtn'}>대출 신청</button>
+            <button className={checkedInputs.length === 0 ? 'btnNotActive' : 'loanBtnActive'}
+                    id={'dynamicBtn'} onClick={loanBook}>대출 신청
+            </button>
           </main>
         </div>
       </div>
