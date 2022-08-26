@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import PagesLogo from "../components/PagesLogo";
-import axios, {AxiosResponse} from "axios"
+import axios, { AxiosResponse } from "axios"
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const [isEmailOkay, setIsEmailOkay] = useState<any>(null)
@@ -71,9 +72,23 @@ const SignUp = () => {
           },
         })
         .then((res: AxiosResponse<any>) => {
-          alert('회원가입이 완료되었습니다.')
-          window.location.replace('/')
-        });
+          Swal.fire({
+            title: '회원가입 완료',
+            text: '회원가입이 완료되었습니다. 로그인 후 사용해 주세요!',
+            icon: 'success',
+            confirmButtonText: '확인'
+          }).then(() => {
+            window.location.replace('/')
+          })
+        })
+        .catch(() => {
+          Swal.fire({
+            title: 'Error',
+            text: '정보를 다시 확인해주세요.',
+            icon: 'error',
+            confirmButtonText: '확인'
+          })
+        })
     }
   }
 

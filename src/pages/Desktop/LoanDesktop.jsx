@@ -22,6 +22,7 @@ const LoanDesktop = () => {
   }
 
   const loanBook = () => {
+    console.log(user.id)
     let data = {
       "userId": user.id,
       "bookId": checkedInputs
@@ -34,17 +35,24 @@ const LoanDesktop = () => {
             "Content-Type": `application/json`,
           },
         }).then((res) => {
-        Swal.fire({
-          title: 'Success',
-          text: '도서 대출이 완료되었습니다. 관리자 승인 후 메일이 도착하면 실습실에서 대여하세요!',
-          icon: 'success',
-          confirmButtonText: '확인'
-        })
+        if (!res.data) {
+          Swal.fire({
+            title: 'Success',
+            text: '도서 대출 신청이 완료되었습니다. 관리자 승인 후 메일이 오면 실습실에서 대여하세요!',
+            icon: 'success',
+            confirmButtonText: '확인'
+          })
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: res.data,
+            icon: 'error',
+            confirmButtonText: '확인'
+          })
+        }
       })
     }
-
   }
-
 
   if (error) {
     return <div>ERROR</div>
