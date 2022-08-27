@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import jwt_decode from "jwt-decode";
 import NotFound from "../NotFound";
 import axios, { AxiosResponse } from "axios";
+import Swal from "sweetalert2";
 
 const BookManagementDesktop = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
@@ -81,35 +82,42 @@ const BookManagementDesktop = () => {
   }
 
   const edit = () => {
-    let value = window.confirm(`'${placeHolderTitle}' 도서를 수정하시겠습니까?`)
-    let compare = true
-    if (quantity < quantityLeft) {
-      compare = false
-    }
-
-    if (!compare) {
-      alert('남은수량이 총 수량보다 많습니다. 다시 확인해주세요.')
-    }
-
-    if (value && compare) {
-      let data = {
-        "id": editId,
-        "title": title.length === 0 ? placeHolderTitle : title,
-        "author": author.length === 0 ? placeHolderAuthor : author,
-        "publisher": publisher.length === 0 ? placeHolderPublisher : publisher,
-        "quantity": Number(quantity) === 0 ? Number(placeHolderQuantity) : quantity,
-        "quantityleft": quantityLeft.length === 0 ? Number(placeHolderQuantityLeft) : quantityLeft
-      }
-      axios
-        .put('http://localhost:8080/api/book', JSON.stringify(data), {
-          headers: {
-            "Content-Type": `application/json`,
-          },
-        })
-        .then((res: AxiosResponse<any>) => {
-          alert('수정이 완료되었습니다.')
-          window.location.reload()
-        })
+    if (Number(quantity) < Number(quantityLeft)) {
+      alert(`촘 수량보다 남은 수량이 더 많습니다. 다시 시도해주세요. 총 수량 : ${quantity}, 남은 수량 : ${quantityLeft} ${quantity < quantityLeft}`)
+    } else if (Number(quantity) >= Number(quantityLeft)) {
+      Swal.fire({
+        title: `'${placeHolderTitle}' 도서를 수정하시겠습니까?`,
+        showDenyButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: 'No',
+        customClass: {
+          actions: 'my-actions',
+          cancelButton: 'order-1 right-gap',
+          confirmButton: 'order-2',
+          denyButton: 'order-3',
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let data = {
+            "id": editId,
+            "title": title.length === 0 ? placeHolderTitle : title,
+            "author": author.length === 0 ? placeHolderAuthor : author,
+            "publisher": publisher.length === 0 ? placeHolderPublisher : publisher,
+            "quantity": Number(quantity) === 0 ? Number(placeHolderQuantity) : quantity,
+            "quantityleft": quantityLeft.length === 0 ? Number(placeHolderQuantityLeft) : quantityLeft
+          }
+          axios
+            .put('http://localhost:8080/api/book', JSON.stringify(data), {
+              headers: {
+                "Content-Type": `application/json`,
+              },
+            })
+            .then((res: AxiosResponse<any>) => {
+              Swal.fire('수정 되었습니다.', '', 'success')
+                .then(() => {window.location.reload()})
+            })
+        }
+      })
     }
   }
 
@@ -226,7 +234,7 @@ const BookManagementDesktop = () => {
                         placeholder={placeHolderQuantity}
                         multiline
                         onChange={checkQuantityOnlyNumber}
-                        inputProps={{ maxLength: 3 }}
+                        inputProps={{maxLength: 3}}
                         variant="standard"
                       />
 
@@ -239,7 +247,7 @@ const BookManagementDesktop = () => {
                         placeholder={placeHolderQuantityLeft}
                         multiline
                         onChange={checkQuantityLeftOnlyNumber}
-                        inputProps={{ maxLength: 3 }}
+                        inputProps={{maxLength: 3}}
                         variant="standard"
                       />
                     </div>
@@ -256,8 +264,7 @@ const BookManagementDesktop = () => {
         </div>
       )
     }
-  }
-  else {
+  } else {
     return <NotFound/>
   }
 }

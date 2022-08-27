@@ -5,6 +5,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .addBookForm {
     width: 400px;
 }
@@ -15,7 +22,6 @@
     margin-top: 13%;
     height: 423px;
     width: 400px;
-    /*border: 1px solid #000;*/
 }
 
 .gap {
@@ -217,6 +223,7 @@
 }
 
 .noDataBox div {
+    font-family: 'NanumSquareRound';
     font-size: 30px;
     text-align: center;
     position: relative;
@@ -225,6 +232,7 @@
 }
 
 .noDataBox button {
+    font-size: 13px;
     background: #f2d100;
     color: #171717;
     border: none;
@@ -243,7 +251,3 @@
     background: #d7bc00;
     cursor: pointer;
 }
-
-/*.reloadBtn {*/
-
-/*}*/

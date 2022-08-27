@@ -55,7 +55,7 @@ const SignUp = () => {
   }
 
   const loginHandler = async () => {
-    if (password.length < 4) {
+    if (password.length < 3) {
       setPasswordIsOverFour(false)
     } else {
       let data = {
@@ -65,6 +65,8 @@ const SignUp = () => {
         "password": password,
         "code": code
       }
+      console.log(data)
+
       axios
         .post('http://localhost:8080/api/sign-up', JSON.stringify(data), {
           headers: {

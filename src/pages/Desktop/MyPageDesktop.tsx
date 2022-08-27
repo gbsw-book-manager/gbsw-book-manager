@@ -3,6 +3,8 @@ import SideBar from "../../components/SideBar";
 import '../../styles/MyPage.css'
 import jwt_decode from "jwt-decode";
 import AdminSideBar from "../../components/AdminSideBar";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const MyPageDesktop = () => {
   const [currentPassword, setCurrentPassword] = useState<string>('')
@@ -28,10 +30,6 @@ const MyPageDesktop = () => {
   }, [])
 
   const changePassword = () => {
-    if (currentPassword.length === 0) {
-      setCurrentPasswordIsTrue(false)
-    }
-
     if (newPassword.length < 4) {
       setNewPasswordOverFour(false)
     }
@@ -40,6 +38,35 @@ const MyPageDesktop = () => {
       setPasswordIsEqual(false)
     }
 
+    if (newPassword.length > 3 && newPassword === checkPassword) {
+      let data = {
+        "username": user.email,
+        "password": currentPassword,
+        "newPassword": newPassword,
+        "newPasswordCheck": checkPassword
+      }
+      axios
+        .put('http://localhost:8080/api/update-password', JSON.stringify(data), {
+          headers: {
+            "Content-Type": 'application/json'
+          },
+        })
+        .then((res) => {
+          if (res.data) {
+            setCurrentPasswordIsTrue(false)
+          } else if (!res.data) {
+            Swal.fire({
+              title: 'Success',
+              text: '비밀번호 변경이 완료되었습니다. 다시 로그인해 주세요.',
+              icon: 'success',
+              confirmButtonText: '확인'
+            }).then(() => {
+              localStorage.removeItem('user')
+              window.location.replace('/')
+            })
+          }
+        })
+    }
   }
 
   return (
@@ -101,7 +128,7 @@ const MyPageDesktop = () => {
                     {
                       currentPasswordIsTrue === false && (
                         <div className={'alertMessage'}>
-                          현재 비밀번호를 입력하세요.
+                          현재 비밀번호와 일치하지 않습니다.
                         </div>
                       )
                     }

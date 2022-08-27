@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, { ChangeEvent, useState } from "react";
 import PagesLogo from "../components/PagesLogo";
 import '../styles/Login.css'
 import axios from "axios";
@@ -6,52 +6,36 @@ import qs from 'qs';
 
 const Login = () => {
 
-  const [isIdFilled, setIsIdFilled] = useState<boolean>()
-  const [isPasswordFilled, setIsPasswordFilled] = useState<boolean>()
   const [id, setId] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [login, setLogin] = useState<boolean>(true)
 
   const loginHandler = () => {
-
-  if (id !== '') {
-      setIsIdFilled(true)
-    } else {
-      setIsIdFilled(false)
-    }
-
-    if (password !== '') {
-      setIsPasswordFilled(true)
-    } else {
-      setIsPasswordFilled(false)
-    }
-    if (isIdFilled && isPasswordFilled) {
-      axios({
-        method: "post",
-        url: "http://localhost:8080/api/login",
-        data: qs.stringify({
-          username: id,
-          password: password,
-        }),
-        responseType: 'json',
-        headers: {
-          "content-type": "application/x-www-form-urlencoded;charset=utf-8",
-        },
+    axios({
+      method: "post",
+      url: "http://localhost:8080/api/login",
+      data: qs.stringify({
+        username: id,
+        password: password,
+      }),
+      responseType: 'json',
+      headers: {
+        "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+      },
+    })
+      .then((res) => {
+        localStorage.setItem('user', JSON.stringify({
+          'access_token': res.data.access_token,
+          'studentId': res.data.studentId,
+          'name': res.data.name,
+          'email': res.data.username,
+          'id': res.data.id
+        }))
+        window.location.replace('/')
       })
-        .then((res) => {
-          localStorage.setItem('user', JSON.stringify({
-            'access_token': res.data.access_token,
-            'studentId': res.data.studentId,
-            'name': res.data.name,
-            'email': res.data.username,
-            'id': res.data.id
-          }))
-          window.location.replace('/')
-        })
-        .catch((err) => {
-          setLogin(false)
-        })
-    }
+      .catch((err) => {
+        setLogin(false)
+      })
   }
 
   const handleOnKeyPress = (e: any) => {

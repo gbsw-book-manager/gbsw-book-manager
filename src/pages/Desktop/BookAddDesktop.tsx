@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import jwt_decode from "jwt-decode";
 import NotFound from "../NotFound";
+import Swal from "sweetalert2";
 
 const BookAddDesktop = () => {
   const [title, setTitle] = useState<string>('')
@@ -47,8 +48,14 @@ const BookAddDesktop = () => {
           },
         })
         .then((res: AxiosResponse<any>) => {
-          alert('도서 추가가 완료되었습니다.')
-          window.location.reload()
+          Swal.fire({
+            title: 'Success',
+            text: '도서 추가가 완료되었습니다.',
+            icon: 'success',
+            confirmButtonText: '확인'
+          }).then(() => {
+            window.location.reload()
+          })
         });
     }
   }
