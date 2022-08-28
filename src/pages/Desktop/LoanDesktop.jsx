@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SideBar from "../../components/SideBar";
 import fetcher from "../../utils/fetcher";
 import useSWR from 'swr'
@@ -21,6 +21,15 @@ const LoanDesktop = () => {
     }
   }
 
+  useEffect(() => {
+    if (user.access_token === undefined) {
+      Swal.fire( {
+        title: '로그인 후 이용해 주세요.' ,
+        confirmButtonText: '확인',
+      }).then(() => {window.location.replace('/')})
+    }
+  }, [])
+
   const loanBook = () => {
     console.log(user.id)
     let data = {
@@ -41,7 +50,7 @@ const LoanDesktop = () => {
             text: '도서 대출 신청이 완료되었습니다. 관리자 승인 후 메일이 오면 실습실에서 대여하세요!',
             icon: 'success',
             confirmButtonText: '확인'
-          })
+          }).then(() => {window.location.reload()})
         } else {
           Swal.fire({
             title: 'Error!',

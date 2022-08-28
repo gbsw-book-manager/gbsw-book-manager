@@ -56,29 +56,47 @@ const BookManagementDesktop = () => {
   const [showEditBox, setShowEditBox] = useState<boolean>(false)
   const {data, error} = useSWR('http://localhost:8080/api/book', fetcher)
 
-  const deleteItem = (id: string) => {
-    let isTrue = window.confirm('정말로 삭제하시겠습니까?')
+  const deleteItem = (id: string, title: string) => {
+    Swal.fire({
+      title: `'${title}' 도서를 삭제하시겠습니까?`,
+      showDenyButton: true,
+      confirmButtonText: '확인',
+      denyButtonText: '취소',
+      customClass: {
+        actions: 'my-actions',
+        cancelButton: 'order-1 right-gap',
+        confirmButton: 'order-2',
+        denyButton: 'order-3',
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:8080/api/book?id=${id}`)
+          .then((res) => {
+            if (res.data.length === 0) {
+              Swal.fire( {
+                text: `${title} 도서를 삭제 했습니다.` ,
+                confirmButtonText: '확인',
+                icon: 'success'
+              }).then(() => {window.location.reload()})
+            } else {
+              let str: any = ''
+              for (let i in res.data) {
+                str += `${res.data[i]}, `
+              }
 
-    if (isTrue) {
-      axios
-        .delete(`http://localhost:8080/api/book?id=${id}`)
-        .then((res) => {
-          if (res.data.length === 0) {
-            alert('삭제가 완료되었습니다.')
-            window.location.reload()
-          } else {
-            let str: any = ''
-            for (let i in res.data) {
-              str += `${res.data[i]}, `
+              str = str.slice(0, -1);
+              str = str.slice(0, -1);
+
+              Swal.fire( {
+                text: `${str} 님이 도서를 대출중이여서 삭제 할 수 없습니다.` ,
+                confirmButtonText: '확인',
+                icon: 'error'
+              })
             }
-
-            str = str.slice(0, -1);
-            str = str.slice(0, -1);
-
-            alert(str + ' 님이 도서를 대출중이여서 삭제 할 수 없습니다.')
-          }
-        })
-    }
+          })
+      }
+    })
   }
 
   const edit = () => {
@@ -88,8 +106,8 @@ const BookManagementDesktop = () => {
       Swal.fire({
         title: `'${placeHolderTitle}' 도서를 수정하시겠습니까?`,
         showDenyButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: 'No',
+        confirmButtonText: '확인',
+        denyButtonText: '취소',
         customClass: {
           actions: 'my-actions',
           cancelButton: 'order-1 right-gap',
@@ -114,7 +132,9 @@ const BookManagementDesktop = () => {
             })
             .then((res: AxiosResponse<any>) => {
               Swal.fire('수정 되었습니다.', '', 'success')
-                .then(() => {window.location.reload()})
+                .then(() => {
+                  window.location.reload()
+                })
             })
         }
       })
@@ -162,7 +182,7 @@ const BookManagementDesktop = () => {
                         <td>
                           <button onClick={(e) => {
                             setDeleteId(log.id)
-                            deleteItem(log.id)
+                            deleteItem(log.id, log.title)
                           }} className={'deleteBtn'}>
                             <BsTrash style={{marginBottom: '-3px'}}/>
                             <span style={{marginLeft: '2px'}}>삭제</span>

@@ -12,6 +12,15 @@ const RegisterDesktop = () => {
 
   const user = JSON.parse(localStorage.getItem('user') || '{}')
 
+  useEffect(() => {
+    if (user.access_token === undefined) {
+      Swal.fire( {
+        title: '로그인 후 이용해 주세요.' ,
+        confirmButtonText: '확인',
+      }).then(() => {window.location.replace('/')})
+    }
+  }, [])
+
   const LoadData = () => {
     if (title.length > 0 && url.length > 0) {
       let data = {

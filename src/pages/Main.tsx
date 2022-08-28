@@ -7,6 +7,7 @@ import profileImage from '../images/profile.png'
 import MainLogo from "../components/MainLogo"
 import Buttons from "../components/Buttons"
 import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
 
 const Main = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
@@ -24,11 +25,33 @@ const Main = () => {
   }, [])
 
   const logout = () => {
-    let returnValue = window.confirm('정말로 로그아웃 하시겠습니까?')
+    Swal.fire({
+      title: '정말로 로그아웃 하시겠습니까?',
+      showDenyButton: true,
+      confirmButtonText: '확인',
+      denyButtonText: '취소',
+      customClass: {
+        actions: 'my-actions',
+        cancelButton: 'order-1 right-gap',
+        confirmButton: 'order-2',
+        denyButton: 'order-3',
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('user')
+        window.location.replace('/')
+      }
+    })
+  }
 
-    if(returnValue) {
-      localStorage.removeItem('user')
-      window.location.replace('/')
+  const changePage = (params: string) => {
+    if (user.access_token === undefined) {
+      Swal.fire( {
+        title: '로그인 후 이용해 주세요.' ,
+        confirmButtonText: '확인',
+      })
+    } else {
+      window.location.href = `/${params}`
     }
   }
 
@@ -56,22 +79,22 @@ const Main = () => {
         isAdmin === false && (
           <div className="container">
 
-            <div className="divSquare loanBox" onClick={() => window.location.href = '/loan'}>
+            <div className="divSquare loanBox" onClick={() => changePage('loan')}>
               <img src={loan} alt={'loan'} className={'icons loanIcon'}/>
               <div className={'description'}>도서 대출</div>
             </div>
 
-            <div className="divSquare returnBox" onClick={() => window.location.href = '/return'}>
+            <div className="divSquare returnBox" onClick={() => changePage('return')}>
               <img src={returnImage} alt={'return'} className={'icons returnIcon'}/>
               <div className={'description'}>도서 반납</div>
             </div>
 
-            <div className="divSquare registerBox" onClick={() => window.location.href = '/register'}>
+            <div className="divSquare registerBox" onClick={() => changePage('register')}>
               <img src={registerImage} alt={'register'} className={'icons registerIcon'}/>
               <div className={'description'}>희망도서 신청</div>
             </div>
 
-            <div className="divSquare mypageBox" onClick={() => window.location.href = '/mypage'}>
+            <div className="divSquare mypageBox" onClick={() => changePage('mypage')}>
               <img src={profileImage} alt={'mypage'} className={'icons profileIcon'}/>
               <div className={'description'}>마이페이지</div>
             </div>

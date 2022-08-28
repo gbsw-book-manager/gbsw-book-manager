@@ -20,6 +20,15 @@ const MyPageDesktop = () => {
   let user = JSON.parse(localStorage.getItem('user') || '{}')
 
   useEffect(() => {
+    if (user.access_token === undefined) {
+      Swal.fire( {
+        title: '로그인 후 이용해 주세요.' ,
+        confirmButtonText: '확인',
+      }).then(() => {window.location.replace('/')})
+    }
+  }, [])
+
+  useEffect(() => {
     if (user.access_token !== undefined) {
       let decoded: any = jwt_decode(user.access_token)
       decoded = decoded.roles

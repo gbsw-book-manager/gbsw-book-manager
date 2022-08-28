@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SideBar from "../../components/SideBar";
 import fetcher from "../../utils/fetcher";
 import useSWR from 'swr'
 import '../../styles/Table.css'
 import Loading from "../../components/Loading";
+import Swal from "sweetalert2";
 
 const ReturnDesktop = () => {
-  const username = JSON.parse(localStorage.getItem('user') || '{}').name
   const [checkedInputs, setCheckedInputs] = useState([]);
+
+  const user = JSON.parse(localStorage.getItem('user') || '{}')
 
   const {data, error} = useSWR('http://localhost:8080/api/book', fetcher)
 
@@ -18,6 +20,15 @@ const ReturnDesktop = () => {
       setCheckedInputs(checkedInputs.filter((el) => el !== id));
     }
   }
+
+  useEffect(() => {
+    if (user.access_token === undefined) {
+      Swal.fire( {
+        title: '로그인 후 이용해 주세요.' ,
+        confirmButtonText: '확인',
+      }).then(() => {window.location.replace('/')})
+    }
+  }, [])
 
   if (error) {
     return <div>ERROR</div>
@@ -35,7 +46,7 @@ const ReturnDesktop = () => {
             </div>
             <div className={'divider'}></div>
             <div className={'tableContainer'}>
-              <div>{username}님의 대출 도서 수 : {data.length}</div>
+              <div>{user.name}님의 대출 도서 수 : {data.length}</div>
               <table className={'mainTable'}>
                 <thead>
                 <tr>
