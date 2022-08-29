@@ -27,32 +27,36 @@ const StudentManagementDesktop = () => {
   }, [])
 
   const getUserLoanBooks = (name: string, id: number) => {
-    axios.
-      get(`http://localhost:8080/api/user?id=${id}`)
+    axios.get(`http://localhost:8080/api/user?id=${id}`)
       .then((res) => {
-        let books: string = ''
-        for (let i = 0; i < res.data.length; i++) {
-          books += res.data[i].title + ', '
+        if (res.data.length === 0) {
+          Swal.fire({
+            title: `${name}님의 대출 도서 정보가 없습니다.`,
+            confirmButtonText: '확인',
+          })
+        } else {
+          let books: string = ''
+          for (let i = 0; i < res.data.length; i++) {
+            books += res.data[i].title + ', '
+          }
+
+          books = books.slice(0, -1);
+          books = books.slice(0, -1);
+
+          Swal.fire({
+            title: `${name}님의 대출 도서 정보`,
+            text: `도서 목록 : ${books}`,
+            confirmButtonText: '확인',
+          })
         }
-
-        books = books.slice(0, -1);
-        books = books.slice(0, -1);
-
-        Swal.fire({
-          title: `${name}님의 대출 도서 정보`,
-          text: `도서 목록 : ${books}`,
-          confirmButtonText: '확인',
-        })
       })
   }
 
   if (error) {
     return <div>ERROR</div>
-  }
-  else if (!data) {
+  } else if (!data) {
     return <Loading/>
-  }
-  else {
+  } else {
     if (isAdmin) {
       return (
         <div className={'adminpage'}>
@@ -68,10 +72,10 @@ const StudentManagementDesktop = () => {
 
                     <thead>
                     <tr>
-                      <th style={{width: '200px', backgroundColor: '#8e279b'}} >이름</th>
-                      <th style={{ backgroundColor: '#8e279b' }}>학번</th>
-                      <th style={{ backgroundColor: '#8e279b' }}>이메일</th>
-                      <th style={{ backgroundColor: '#8e279b' }}>대출 도서 수</th>
+                      <th style={{width: '200px', backgroundColor: '#8e279b'}}>이름</th>
+                      <th style={{backgroundColor: '#8e279b'}}>학번</th>
+                      <th style={{backgroundColor: '#8e279b'}}>이메일</th>
+                      <th style={{backgroundColor: '#8e279b'}}>대출 도서 수</th>
                     </tr>
                     </thead>
 
@@ -81,7 +85,11 @@ const StudentManagementDesktop = () => {
                         <td>{log.name}</td>
                         <td>{log.studen_id}</td>
                         <td>{log.username}</td>
-                        <td>{log.books.length}권 <button onClick={() => getUserLoanBooks(log.name, log.id)} className={'moreInfo'}><AiOutlineInfoCircle style={{ marginBottom: '-3px', fontSize: '15px' }}/> </button></td>
+                        <td>{log.books.length}권
+                          <button onClick={() => getUserLoanBooks(log.name, log.id)}
+                                  className={'moreInfo'}>
+                          <AiOutlineInfoCircle
+                                  style={{marginBottom: '-3px', fontSize: '15px'}}/></button></td>
                       </tr>
                     ))}
                     </tbody>
