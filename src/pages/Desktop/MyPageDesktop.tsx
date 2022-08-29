@@ -5,6 +5,7 @@ import jwt_decode from "jwt-decode";
 import AdminSideBar from "../../components/AdminSideBar";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { getCookie, removeCookie } from "../../utils/cookies";
 
 const MyPageDesktop = () => {
   const [currentPassword, setCurrentPassword] = useState<string>('')
@@ -17,10 +18,8 @@ const MyPageDesktop = () => {
 
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
-  let user = JSON.parse(localStorage.getItem('user') || '{}')
-
   useEffect(() => {
-    if (user.access_token === undefined) {
+    if (getCookie('access_token') === undefined) {
       Swal.fire( {
         title: '로그인 후 이용해 주세요.' ,
         confirmButtonText: '확인',
@@ -29,8 +28,8 @@ const MyPageDesktop = () => {
   }, [])
 
   useEffect(() => {
-    if (user.access_token !== undefined) {
-      let decoded: any = jwt_decode(user.access_token)
+    if (getCookie('access_token') !== undefined) {
+      let decoded: any = jwt_decode(getCookie('access_token'))
       decoded = decoded.roles
       if (decoded.includes('ROLE_ADMIN')) {
         setIsAdmin(true)
@@ -49,7 +48,7 @@ const MyPageDesktop = () => {
 
     if (newPassword.length > 3 && newPassword === checkPassword) {
       let data = {
-        "username": user.email,
+        "username": getCookie('email'),
         "password": currentPassword,
         "newPassword": newPassword,
         "newPasswordCheck": checkPassword
@@ -70,7 +69,11 @@ const MyPageDesktop = () => {
               icon: 'success',
               confirmButtonText: '확인'
             }).then(() => {
-              localStorage.removeItem('user')
+              removeCookie('access_token')
+              removeCookie('name')
+              removeCookie('id')
+              removeCookie('email')
+              removeCookie('studentId')
               window.location.replace('/')
             })
           }
@@ -104,17 +107,17 @@ const MyPageDesktop = () => {
 
               <tr>
                 <td className={'tableKey'}>이름</td>
-                <td className={'tableValue'}>{user.name}</td>
+                <td className={'tableValue'}>{getCookie('name')}</td>
               </tr>
 
               <tr>
                 <td className={'tableKey'}>학번</td>
-                <td className={'tableValue'}>{user.studentId}</td>
+                <td className={'tableValue'}>{getCookie('studentId')}</td>
               </tr>
 
               <tr>
                 <td className={'tableKey'}>이메일</td>
-                <td className={'tableValue'}>{user.email}</td>
+                <td className={'tableValue'}>{getCookie('email')}</td>
               </tr>
 
               <tr>

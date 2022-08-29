@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import jwt_decode from "jwt-decode";
 import NotFound from "../NotFound";
 import Swal from "sweetalert2";
+import { getCookie } from "../../utils/cookies";
 
 const BookAddDesktop = () => {
   const [title, setTitle] = useState<string>('')
@@ -14,11 +15,9 @@ const BookAddDesktop = () => {
   const [quantity, setQuantity] = useState<number>(1)
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
-  let user = JSON.parse(localStorage.getItem('user') || '{}')
-
   useEffect(() => {
-    if (user.access_token !== undefined) {
-      let decoded: any = jwt_decode(user.access_token)
+    if (getCookie('access_token') !== undefined) {
+      let decoded: any = jwt_decode(getCookie('access_token'))
       decoded = decoded.roles
       if (decoded.includes('ROLE_ADMIN')) {
         setIsAdmin(true)

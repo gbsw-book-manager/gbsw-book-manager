@@ -6,13 +6,11 @@ import '../../styles/Table.css'
 import Loading from "../../components/Loading";
 import Swal from "sweetalert2";
 import axios from "axios";
+import {getCookie} from "../../utils/cookies";
 
 const ReturnDesktop = () => {
   const [checkedInputs, setCheckedInputs] = useState([]);
-
-  const user = JSON.parse(localStorage.getItem('user') || '{}')
-
-  const {data, error} = useSWR(`http://localhost:8080/api/user?id=${user.id}`, fetcher)
+  const {data, error} = useSWR(`http://localhost:8080/api/user?id=${getCookie('id')}`, fetcher)
 
   const checkEvent = (checked, id) => {
     if (checked) {
@@ -25,7 +23,7 @@ const ReturnDesktop = () => {
   const returnBook = () => {
     if (checkedInputs.length > 0) {
       let data = {
-        'userId': user.id,
+        'userId': getCookie('id'),
         'bookTitle': checkedInputs
       }
 
@@ -48,7 +46,7 @@ const ReturnDesktop = () => {
   }
 
   useEffect(() => {
-    if (user.access_token === undefined) {
+    if (getCookie('access_token') === undefined) {
       Swal.fire({
         title: '로그인 후 이용해 주세요.',
         confirmButtonText: '확인',
@@ -78,7 +76,7 @@ const ReturnDesktop = () => {
               data.length > 0 && (
                 <div>
                   <div className={'tableContainer'}>
-                    <div style={{fontFamily: 'GyeonggiTitleM', fontSize: '18px'}}>{user.name}님의 대출 도서 수 : {data.length}권
+                    <div style={{fontFamily: 'GyeonggiTitleM', fontSize: '18px'}}>{getCookie('name')}님의 대출 도서 수 : {data.length}권
                     </div>
                     <br/>
                     <table className={'mainTable'}>

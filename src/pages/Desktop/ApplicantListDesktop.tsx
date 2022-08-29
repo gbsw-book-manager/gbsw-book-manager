@@ -8,19 +8,16 @@ import Loading from "../../components/Loading";
 import { BsTrash } from "react-icons/bs";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { getCookie } from "../../utils/cookies";
 
 const ApplicantListDesktop = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
   const {data, error} = useSWR('http://localhost:8080/api/book/application', fetcher)
 
-  console.log(data)
-
-  let user = JSON.parse(localStorage.getItem('user') || '{}')
-
   useEffect(() => {
-    if (user.access_token !== undefined) {
-      let decoded: any = jwt_decode(user.access_token)
+    if (getCookie('access_token') !== undefined) {
+      let decoded: any = jwt_decode(getCookie('access_token'))
       decoded = decoded.roles
       if (decoded.includes('ROLE_ADMIN')) {
         setIsAdmin(true)

@@ -6,10 +6,10 @@ import '../../styles/Table.css'
 import Loading from "../../components/Loading";
 import axios from "axios";
 import Swal from "sweetalert2";
+import {getCookie} from "../../utils/cookies";
 
 const LoanDesktop = () => {
   const [checkedInputs, setCheckedInputs] = useState([]);
-  const user = JSON.parse(localStorage.getItem('user') || '{}')
 
   const {data, error} = useSWR('http://localhost:8080/api/book', fetcher)
 
@@ -22,7 +22,7 @@ const LoanDesktop = () => {
   }
 
   useEffect(() => {
-    if (user.access_token === undefined) {
+    if (getCookie('access_token') === undefined) {
       Swal.fire( {
         title: '로그인 후 이용해 주세요.' ,
         confirmButtonText: '확인',
@@ -31,9 +31,8 @@ const LoanDesktop = () => {
   }, [])
 
   const loanBook = () => {
-    console.log(user.id)
     let data = {
-      "userId": user.id,
+      "userId": getCookie('id'),
       "bookId": checkedInputs
     }
 

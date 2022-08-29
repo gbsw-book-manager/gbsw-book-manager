@@ -8,14 +8,14 @@ import MainLogo from "../components/MainLogo"
 import Buttons from "../components/Buttons"
 import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
+import { getCookie, removeCookie } from "../utils/cookies";
 
 const Main = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
-  let user = JSON.parse(localStorage.getItem('user') || '{}')
 
   useEffect(() => {
-    if (user.access_token !== undefined) {
-      let decoded: any = jwt_decode(user.access_token)
+    if (getCookie('access_token') !== undefined) {
+      let decoded: any = jwt_decode(getCookie('access_token'))
       decoded = decoded.roles
       if (decoded.includes('ROLE_ADMIN')) {
         setIsAdmin(true)
@@ -38,14 +38,18 @@ const Main = () => {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem('user')
+        removeCookie('access_token')
+        removeCookie('name')
+        removeCookie('id')
+        removeCookie('email')
+        removeCookie('studentId')
         window.location.replace('/')
       }
     })
   }
 
   const changePage = (params: string) => {
-    if (user.access_token === undefined) {
+    if (getCookie('access_token') === undefined) {
       Swal.fire( {
         title: '로그인 후 이용해 주세요.' ,
         confirmButtonText: '확인',
@@ -62,15 +66,15 @@ const Main = () => {
       <br/>
 
       {
-        user.access_token === undefined && (
+        getCookie('access_token') === undefined && (
           <Buttons/>
         )
       }
 
       {
-        user.access_token != null && (
+        getCookie('access_token') != null && (
           <div className={'stateBtnContainer'}>
-            <div className={'welcomePhrase'}>{user.name}님, 반갑습니다 !</div>
+            <div className={'welcomePhrase'}>{getCookie('name')}님, 반갑습니다 !</div>
             <button onClick={logout} className={'logoutBtn'}>Logout</button>
           </div>
         )

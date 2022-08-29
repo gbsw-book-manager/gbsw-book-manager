@@ -5,15 +5,14 @@ import '../../styles/Register.scss'
 import TextField from "@mui/material/TextField";
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { getCookie } from "../../utils/cookies";
 
 const RegisterDesktop = () => {
   const [title, setTitle] = useState<string>('')
   const [url, setUrl] = useState<string>('')
 
-  const user = JSON.parse(localStorage.getItem('user') || '{}')
-
   useEffect(() => {
-    if (user.access_token === undefined) {
+    if (getCookie('access_token') === undefined) {
       Swal.fire( {
         title: '로그인 후 이용해 주세요.' ,
         confirmButtonText: '확인',
@@ -24,8 +23,8 @@ const RegisterDesktop = () => {
   const LoadData = () => {
     if (title.length > 0 && url.length > 0) {
       let data = {
-        'identifyId': user.id,
-        'applicant': user.name,
+        'identifyId': getCookie('id'),
+        'applicant': getCookie('name'),
         "title": title,
         "url": url
       }

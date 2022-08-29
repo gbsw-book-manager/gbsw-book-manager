@@ -9,6 +9,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { ImCancelCircle } from 'react-icons/im'
 import axios from "axios";
 import Swal from "sweetalert2";
+import { getCookie } from "../../utils/cookies";
 
 const LoanRequestListDesktop = () => {
 
@@ -16,11 +17,9 @@ const LoanRequestListDesktop = () => {
 
   const {data, error} = useSWR('http://localhost:8080/api/book/loan', fetcher)
 
-  let user = JSON.parse(localStorage.getItem('user') || '{}')
-
   useEffect(() => {
-    if (user.access_token !== undefined) {
-      let decoded: any = jwt_decode(user.access_token)
+    if (getCookie('access_token') !== undefined) {
+      let decoded: any = jwt_decode(getCookie('access_token'))
       decoded = decoded.roles
       if (decoded.includes('ROLE_ADMIN')) {
         setIsAdmin(true)

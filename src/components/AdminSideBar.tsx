@@ -9,6 +9,7 @@ import { FiLogOut } from 'react-icons/fi'
 import { GiBookshelf } from 'react-icons/gi'
 import { BsArrowReturnLeft } from 'react-icons/bs'
 import Swal from "sweetalert2";
+import { removeCookie } from "../utils/cookies";
 
 const SideBar = () => {
 
@@ -26,7 +27,11 @@ const SideBar = () => {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem('user')
+        removeCookie('access_token')
+        removeCookie('name')
+        removeCookie('id')
+        removeCookie('email')
+        removeCookie('studentId')
         window.location.replace('/')
       }
     })
@@ -62,7 +67,7 @@ const SideBar = () => {
           <a href="/mypage" className="menu-item"><CgProfile className={'menu-icons'}/> <span>마이페이지</span></a>
           <br/>
           <div className="menu-item adminLogout" onClick={logoutHandler}><FiLogOut className={'menu-icons'}/>
-            <span>로그아웃</span></div>
+            <span> 로그아웃</span></div>
         </nav>
       </aside>
     </div>

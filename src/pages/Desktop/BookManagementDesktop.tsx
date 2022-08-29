@@ -11,6 +11,7 @@ import jwt_decode from "jwt-decode";
 import NotFound from "../NotFound";
 import axios, { AxiosResponse } from "axios";
 import Swal from "sweetalert2";
+import { getCookie } from "../../utils/cookies";
 
 const BookManagementDesktop = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
@@ -28,8 +29,6 @@ const BookManagementDesktop = () => {
   const [quantity, setQuantity] = useState<string>('')
   const [quantityLeft, setQuantityLeft] = useState<string>('')
 
-  const user = JSON.parse(localStorage.getItem('user') || '{}')
-
   const checkQuantityOnlyNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = e.target
     const onlyNumber = value.replace(/[^0-9]/g, '')
@@ -44,8 +43,8 @@ const BookManagementDesktop = () => {
 
 
   useEffect(() => {
-    if (user.access_token !== undefined) {
-      let decoded: any = jwt_decode(user.access_token)
+    if (getCookie('access_token') !== undefined) {
+      let decoded: any = jwt_decode(getCookie('access_token'))
       decoded = decoded.roles
       if (decoded.includes('ROLE_ADMIN')) {
         setIsAdmin(true)

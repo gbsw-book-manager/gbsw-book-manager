@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import AdminSideBar from "../../components/AdminSideBar";
 import jwt_decode from "jwt-decode";
 import NotFound from "../NotFound";
+import { getCookie } from "../../utils/cookies";
 
 const OverdueListDesktop = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
-  let user = JSON.parse(localStorage.getItem('user') || '{}')
-
   useEffect(() => {
-    if (user.access_token !== undefined) {
-      let decoded: any = jwt_decode(user.access_token)
+    if (getCookie('access_token') !== undefined) {
+      let decoded: any = jwt_decode(getCookie('access_token'))
       decoded = decoded.roles
       if (decoded.includes('ROLE_ADMIN')) {
         setIsAdmin(true)
