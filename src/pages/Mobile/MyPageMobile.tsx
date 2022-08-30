@@ -89,7 +89,8 @@ const MyPageMobile = () => {
 
   if (isAdmin) {
     return <div className={'minSize'}>화면 크기를 늘여주세요.</div>
-  } else {
+  }
+  else {
     return (
       <div>
         <div className={'app'}>
