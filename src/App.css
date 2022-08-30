@@ -6,6 +6,8 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
 
 .loginContainer {
     margin-top: 30px;
@@ -102,39 +104,6 @@ section {
     filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7476%) hue-rotate(110deg) brightness(98%) contrast(108%);
 }
 
-@media (max-width: 900px) {
-    .container {
-        margin-top: 7vh;
-        height: 340px;
-        width: 340px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .divSquare {
-        width: 150px;
-        height: 150px;
-        margin: 10px;
-        float: left;
-        border-radius: 5px;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    }
-
-    .icons {
-        margin-top: 2vh;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 85px;
-    }
-
-    .description {
-        font-size: 15px;
-        margin-top: 2vh;
-        text-align: center;
-    }
-}
-
 .welcomePhrase {
     margin-top: 20px;
     text-align: center;
@@ -166,4 +135,164 @@ section {
     font-family: 'Aboreto', cursive;
     text-align: center;
     margin-top: 50vh;
+}
+
+@media (max-width: 900px) {
+    .container {
+        margin-top: 7vh;
+        height: 340px;
+        width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .divSquare {
+        width: 150px;
+        height: 150px;
+        margin: 10px;
+        float: left;
+        border-radius: 5px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+
+    .icons {
+        margin-top: 2vh;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 85px;
+    }
+
+    .description {
+        font-size: 15px;
+        margin-top: 2vh;
+        text-align: center;
+    }
+
+    .loginContainer {
+        width: 85vw;
+        max-width: 315px;
+        height: 18vh;
+    }
+
+    .nonDataMobile {
+        height: 100%;
+    }
+
+    .nonDataMobile div {
+        font-family: 'NanumSquareRound';
+        font-size: 20px;
+        text-align: center;
+        margin-top: 100%;
+    }
+
+    .nonDataMobile button {
+        font-size: 13px;
+        background: #f2d100;
+        color: #171717;
+        border: none;
+        border-radius: 3px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 12px;
+        width: 90px;
+        height: 35px;
+        display: block;
+    }
+
+    .nonDataMobile button:hover {
+        background: #d7bc00;
+        cursor: pointer;
+    }
+
+    .applicantFormMobile {
+        margin-top: 40%;
+        width: 85vw;
+        height: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 500px;
+    }
+
+    .applicantFormMobile .mainTitle {
+        font-weight: bold;
+        font-family: 'LeferiPoint-WhiteObliqueA';
+        text-align: center;
+        font-size: 24px;
+    }
+
+    .applicantFormMobile .fieldContainer {
+        margin-top: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+    }
+
+    .fieldContainer .textfield {
+        border-radius: 3px;
+        height: 40px;
+        width: 98%;
+        border: 1px solid #dedede;
+    }
+
+    .applicantFormMobile .msg {
+        margin-top: 3px;
+        margin-left: 3px;
+        font-size: 13px;
+        color: #e82323;
+    }
+
+    .applicantFormMobile button {
+        width: 70px;
+        height: 30px;
+        border: none;
+        border-radius: 3px;
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .applicantBtnNotActive {
+        background: #ccc;
+    }
+
+    .applicantBtnActive {
+        background-color: #2a79e3;
+        color: #fff;
+    }
+
+    .applicantBtnActive:hover {
+        cursor: pointer;
+    }
+
+    .MyPageComponent {
+        margin-top: 35px;
+        width: 100%;
+        height: 180px;
+        overflow: auto;
+    }
+
+    .componentTitle {
+        font-size: 18px;
+        font-family: NanumSquare;
+        margin-bottom: 15px;
+    }
+
+    .MyPageComponent ul {
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+    }
+
+    .MyPageComponent li {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        padding: 5px 0px 5px 5px;
+        margin-bottom: 5px;
+        border-bottom: 1px solid #efefef;
+        font-size: 12px;
+    }
 }

@@ -1,11 +1,8 @@
 import React from "react"
-import AdminHamburgerMenu from "../../components/AdminHamburgerMenu";
 
 const BookManagementMobile = () => {
   return (
-    <div>
-      <AdminHamburgerMenu/>
-    </div>
+    <div className={'minSize'}>화면 크기를 늘여주세요.</div>
   )
 }
 

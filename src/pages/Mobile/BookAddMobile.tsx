@@ -2,9 +2,7 @@ import React from "react";
 
 const BookAddMobile = () => {
   return (
-    <div>
-      MOBILE
-    </div>
+    <div className={'minSize'}>화면 크기를 늘여주세요.</div>
   )
 }
 

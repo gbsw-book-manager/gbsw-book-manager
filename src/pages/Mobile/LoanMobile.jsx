@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import fetcher from "../../utils/fetcher";
 import useSWR from 'swr'
 import '../../styles/Table.css'
 import Loading from "../../components/Loading";
 import HamburgerMenu from "../../components/HamburgerMenu";
+import {getCookie} from "../../utils/cookies";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const LoanMobile = () => {
   const [checkedInputs, setCheckedInputs] = useState([]);
@@ -15,6 +18,50 @@ const LoanMobile = () => {
       setCheckedInputs([...checkedInputs, id]);
     } else {
       setCheckedInputs(checkedInputs.filter((el) => el !== id));
+    }
+  }
+
+  useEffect(() => {
+    if (getCookie('access_token') === undefined) {
+      Swal.fire({
+        title: '로그인 후 이용해 주세요.',
+        confirmButtonText: '확인',
+      }).then(() => {
+        window.location.replace('/')
+      })
+    }
+  }, [])
+
+  const loanBook = () => {
+    let data = {
+      "userId": getCookie('id'),
+      "bookId": checkedInputs
+    }
+    if (checkedInputs.length > 0) {
+      axios
+        .post('http://localhost:8080/api/book/loan', JSON.stringify(data), {
+          headers: {
+            "Content-Type": `application/json`,
+          },
+        }).then((res) => {
+        if (!res.data) {
+          Swal.fire({
+            title: 'Success',
+            text: '도서 대출 신청이 완료되었습니다. 관리자 승인 후 메일이 오면 실습실에서 대여하세요!',
+            icon: 'success',
+            confirmButtonText: '확인'
+          }).then(() => {
+            window.location.reload()
+          })
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: res.data,
+            icon: 'error',
+            confirmButtonText: '확인'
+          })
+        }
+      })
     }
   }
 
@@ -32,13 +79,12 @@ const LoanMobile = () => {
               <a href={'/'} style={{color: '#999'}}>홈</a> {'>'}
               <a href={'/loan'} style={{color: '#000'}}> 도서 대출</a>
             </div>
-            <div className={'divider'}></div>
+            <div className={'divider'}/>
             <div className={'tableContainer'}>
               <table className={'mainTable'}>
                 <thead>
                 <tr>
                   <th></th>
-                  <th>ID</th>
                   <th>제목</th>
                   <th>저자</th>
                   <th>출판사</th>
@@ -50,11 +96,12 @@ const LoanMobile = () => {
                 {Object.values(data).map((log) => (
                   <tr key={1}>
                     <td className="checkbox-td">
-                        <input type="checkbox" name={`${log.title}`} className="checkbox-box"
-                        id={log.id} onChange={(e) => {checkEvent(e.currentTarget.checked, log.id)}}
-                        checked={!checkedInputs.includes(log.id) ? false : true}/>
+                      <input type="checkbox" name={`${log.title}`} className="checkbox-box"
+                             id={log.id} onChange={(e) => {
+                        checkEvent(e.currentTarget.checked, log.id)
+                      }}
+                             checked={!checkedInputs.includes(log.id) ? false : true}/>
                     </td>
-                    <td>{log.id}</td>
                     <td>{log.title}</td>
                     <td>{log.author}</td>
                     <td>{log.publisher}</td>
@@ -65,7 +112,9 @@ const LoanMobile = () => {
                 </tbody>
               </table>
             </div>
-            <button className={checkedInputs.length === 0 ? 'btnNotActive' : 'loanBtnActive'} id={'dynamicBtn'}>대출하기</button>
+            <button className={checkedInputs.length === 0 ? 'btnNotActive' : 'loanBtnActive'} id={'dynamicBtn'}
+                    style={{marginTop: '35px'}} onClick={loanBook}>대출하기
+            </button>
           </main>
         </div>
       </div>

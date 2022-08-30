@@ -19,6 +19,8 @@
     font-style: normal;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap');
+
 .addBookForm {
     width: 400px;
 }
@@ -223,8 +225,8 @@
 }
 
 .noDataBox {
-    height: 100%;
-    width: 500px;
+    height: 90%;
+    width: 400px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -272,4 +274,11 @@
 .moreInfo:hover {
     cursor: pointer;
     color: #0079ab;
+}
+
+.minSize {
+    font-size: 60px;
+    text-align: center;
+    margin-top: 50%;
+    font-family: 'Nanum Gothic', sans-serif;
 }

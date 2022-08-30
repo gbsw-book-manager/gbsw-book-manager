@@ -99,24 +99,74 @@
     border: none;
 }
 
+.incorrectPhrase {
+    font-size: 13px;
+    margin-left: 2px;
+    margin-top: 3px;
+    color: #d72020;
+}
+
+.topGap {
+    margin-top: 10%;
+}
+
+.LogintopGap {
+    margin-top: 16%;
+}
+
 @media (max-width: 900px) {
     .form {
         width: 80vw;
         max-width: 300px;
     }
+
     .form-button {
         width: 85vw;
         max-width: 310px;
     }
+
     .signupButton {
         width: 85vw;
         max-width: 310px;
     }
+
     .emailForm {
         margin-left: auto;
         margin-right: auto;
         border: 1px solid #fff;
         height: 85px;
         width: 315px;
+    }
+
+    .incorrectPhrase {
+        margin-left: 5px;
+        font-size: 11px;
+    }
+
+    .signUpContainer {
+        width: 84vw;
+        height: 55vh;
+    }
+
+    .signup-userid-form {
+        width: 220px;
+    }
+
+    .getCodeBtn {
+        margin-left: 0px;
+        width: 75px;
+        font-size: 12px;
+    }
+
+    .emailInputTag {
+        width: 313px;
+    }
+
+    .topGap {
+        margin-top: 15vh;
+    }
+
+    .LogintopGap {
+        margin-top: 20vh;
     }
 }

@@ -20,10 +20,12 @@ const MyPageDesktop = () => {
 
   useEffect(() => {
     if (getCookie('access_token') === undefined) {
-      Swal.fire( {
-        title: '로그인 후 이용해 주세요.' ,
+      Swal.fire({
+        title: '로그인 후 이용해 주세요.',
         confirmButtonText: '확인',
-      }).then(() => {window.location.replace('/')})
+      }).then(() => {
+        window.location.replace('/')
+      })
     }
   }, [])
 

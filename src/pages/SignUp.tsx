@@ -96,7 +96,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <div style={{marginTop: '10%'}}></div>
+      <div className={'topGap'}></div>
       <PagesLogo/>
       <div className='logoTitle' style={{fontSize: '15px', marginTop: '4px'}}>Gbsw Book Manager</div>
 

@@ -65,7 +65,7 @@ const Login = () => {
 
   return (
     <div>
-      <div style={{marginTop: '16%'}}></div>
+      <div className={'LogintopGap'}></div>
       <PagesLogo/>
       <div className='logoTitle' style={{fontSize: '15px', marginTop: '4px'}}>Gbsw Book Manager</div>
 
@@ -95,12 +95,7 @@ const Login = () => {
 
         {
           login === false && (
-            <div style={{
-              fontSize: '13px',
-              marginLeft: '2px',
-              marginTop: '3px',
-              color: '#d72020'
-            }}>아이디 또는 비밀번호가 일치하지 않습니다.</div>
+            <div className={'incorrectPhrase'}>아이디 또는 비밀번호가 일치하지 않습니다.</div>
           )
         }
       </div>
