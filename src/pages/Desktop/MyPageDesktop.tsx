@@ -6,7 +6,6 @@ import AdminSideBar from "../../components/AdminSideBar";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { getCookie, removeCookie } from "../../utils/cookies";
-import MyPageComponentMobile from "../../components/MyPageComponentMobile";
 import MyPageComponentDesktop from "../../components/MyPageComponentDesktop";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
