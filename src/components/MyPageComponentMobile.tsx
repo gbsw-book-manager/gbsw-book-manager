@@ -4,7 +4,7 @@ import { getCookie } from "../utils/cookies";
 import fetcher from "../utils/fetcher";
 import Loading from "./Loading";
 
-const MyPageComponent = () => {
+const MyPageComponentMobile = () => {
   const {data, error} = useSWR(`http://localhost:8080/api/user?id=${getCookie('id')}`, fetcher)
 
   if (error) {
@@ -36,4 +36,4 @@ const MyPageComponent = () => {
   }
 }
 
-export default MyPageComponent
+export default MyPageComponentMobile

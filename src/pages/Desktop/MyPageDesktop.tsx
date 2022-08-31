@@ -6,17 +6,22 @@ import AdminSideBar from "../../components/AdminSideBar";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { getCookie, removeCookie } from "../../utils/cookies";
+import MyPageComponentMobile from "../../components/MyPageComponentMobile";
+import MyPageComponentDesktop from "../../components/MyPageComponentDesktop";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 const MyPageDesktop = () => {
-  const [currentPassword, setCurrentPassword] = useState<string>('')
-  const [newPassword, setNewPassword] = useState<string>('')
-  const [checkPassword, setCheckPassword] = useState<string>('')
-
-  const [currentPasswordIsTrue, setCurrentPasswordIsTrue] = useState<boolean>(true)
-  const [newPasswordOverFour, setNewPasswordOverFour] = useState<boolean>(true)
-  const [passwordIsEqual, setPasswordIsEqual] = useState<boolean>(true)
+  // const [currentPassword, setCurrentPassword] = useState<string>('')
+  // const [newPassword, setNewPassword] = useState<string>('')
+  // const [checkPassword, setCheckPassword] = useState<string>('')
+  //
+  // const [currentPasswordIsTrue, setCurrentPasswordIsTrue] = useState<boolean>(true)
+  // const [newPasswordOverFour, setNewPasswordOverFour] = useState<boolean>(true)
+  // const [passwordIsEqual, setPasswordIsEqual] = useState<boolean>(true)
 
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
+  const [numberOfBooks, setNumberOfBooks] = useState<number>(0)
 
   useEffect(() => {
     if (getCookie('access_token') === undefined) {
@@ -37,51 +42,59 @@ const MyPageDesktop = () => {
         setIsAdmin(true)
       }
     }
+
+    axios.get(`http://localhost:8080/api/user?id=${getCookie('id')}`)
+      .then((res) => {
+        setNumberOfBooks(res.data.length)
+      })
+      .catch(() => {
+        setNumberOfBooks(0)
+      })
   }, [])
 
-  const changePassword = () => {
-    if (newPassword.length < 4) {
-      setNewPasswordOverFour(false)
-    }
-
-    if (newPassword !== checkPassword) {
-      setPasswordIsEqual(false)
-    }
-
-    if (newPassword.length > 3 && newPassword === checkPassword) {
-      let data = {
-        "username": getCookie('email'),
-        "password": currentPassword,
-        "newPassword": newPassword,
-        "newPasswordCheck": checkPassword
-      }
-      axios
-        .put('http://localhost:8080/api/update-password', JSON.stringify(data), {
-          headers: {
-            "Content-Type": 'application/json'
-          },
-        })
-        .then((res) => {
-          if (res.data) {
-            setCurrentPasswordIsTrue(false)
-          } else if (!res.data) {
-            Swal.fire({
-              title: 'Success',
-              text: '비밀번호 변경이 완료되었습니다. 다시 로그인해 주세요.',
-              icon: 'success',
-              confirmButtonText: '확인'
-            }).then(() => {
-              removeCookie('access_token')
-              removeCookie('name')
-              removeCookie('id')
-              removeCookie('email')
-              removeCookie('studentId')
-              window.location.replace('/')
-            })
-          }
-        })
-    }
-  }
+  // const changePassword = () => {
+  //   if (newPassword.length < 4) {
+  //     setNewPasswordOverFour(false)
+  //   }
+  //
+  //   if (newPassword !== checkPassword) {
+  //     setPasswordIsEqual(false)
+  //   }
+  //
+  //   if (newPassword.length > 3 && newPassword === checkPassword) {
+  //     let data = {
+  //       "username": getCookie('email'),
+  //       "password": currentPassword,
+  //       "newPassword": newPassword,
+  //       "newPasswordCheck": checkPassword
+  //     }
+  //     axios
+  //       .put('http://localhost:8080/api/update-password', JSON.stringify(data), {
+  //         headers: {
+  //           "Content-Type": 'application/json'
+  //         },
+  //       })
+  //       .then((res) => {
+  //         if (res.data) {
+  //           setCurrentPasswordIsTrue(false)
+  //         } else if (!res.data) {
+  //           Swal.fire({
+  //             title: 'Success',
+  //             text: '비밀번호 변경이 완료되었습니다. 다시 로그인해 주세요.',
+  //             icon: 'success',
+  //             confirmButtonText: '확인'
+  //           }).then(() => {
+  //             removeCookie('access_token')
+  //             removeCookie('name')
+  //             removeCookie('id')
+  //             removeCookie('email')
+  //             removeCookie('studentId')
+  //             window.location.replace('/')
+  //           })
+  //         }
+  //       })
+  //   }
+  // }
 
   return (
     <div>
@@ -102,90 +115,76 @@ const MyPageDesktop = () => {
             <a href={'/'} style={{color: '#999'}}>홈</a> {'>'}
             <a href={'/mypage'} style={{color: '#000'}}> 마이페이지</a>
           </div>
-          <div className={'divider'}></div>
+          <div className={'divider'}/>
 
-          <div>
-            <table className={'mypageTable'}>
+          <div className={'desktopMyPage'}>
+            <div className={'topContainer'}>
 
-              <tr>
-                <td className={'tableKey'}>이름</td>
-                <td className={'tableValue'}>{getCookie('name')}</td>
-              </tr>
+              <div className={'nameTag'}>
+                <div>{getCookie('name')}<span className={'isAdmin'}>{isAdmin ? '관리자' : '학생'}</span></div>
+              </div>
 
-              <tr>
-                <td className={'tableKey'}>학번</td>
-                <td className={'tableValue'}>{getCookie('studentId')}</td>
-              </tr>
+              <div className={'userinfoContainer'}>
+                <div>학번: <span style={{ marginLeft: '100px' }}>{getCookie('studentId')}</span></div>
+                <div>Email: <span style={{ marginLeft: '80px' }}>{getCookie('email')}</span></div>
 
-              <tr>
-                <td className={'tableKey'}>이메일</td>
-                <td className={'tableValue'}>{getCookie('email')}</td>
-              </tr>
+                {
+                  !isAdmin && (
+                    <div>대출 도서 수: <span style={{ marginLeft: '21px' }}>{numberOfBooks}권</span></div>
+                  )
+                }
+              </div>
 
-              <tr>
-                <td className={'tableKey'}>도서 정보</td>
-                <td className={'tableValue'}>대출 도서 : 0권<br/>연채 도서: 0권</td>
-              </tr>
+            </div>
 
-              <tr>
-                <td className={'tableKey'}>비밀번호 변경</td>
-                <td className={'tableValue'}>
-                  <div className={'passwordChangeContainer'}>
-                    <div style={{marginTop: '20px'}}/>
+            <div className={'bottomContainer'}>
+              <div className={'bottomLeft'}>
+
+                <div className={'loanListTitle'}>
+                  <div>대출 도서 목록</div>
+                </div>
+
+                <MyPageComponentDesktop/>
+              </div>
+              <div className={'bottomRight'}>
+                <div className={'loanListTitle'}>
+                  <div>비밀번호 변경</div>
+
+
+                  <Box>
                     <div>
-                      <span>현재 비밀번호 </span>
-                      <input style={{marginLeft: '35px'}} type={'password'}
-                             onChange={(e) => setCurrentPassword(e.target.value)}/>
-                      <br/>
+                      <div>
+                        <TextField
+                          id="demo-helper-text-aligned"
+                          label="현재 비밀번호"
+                        />
+                      </div>
+
+                      <div>
+                        <TextField
+                          id="demo-helper-text-aligned"
+                          label="새 비밀번호"
+                        />
+                      </div>
+
+                      <div>
+                        <TextField
+                          id="demo-helper-text-aligned"
+                          label="비밀번호 다시 입력"
+                        />
+                      </div>
+
+
+                      <button>비밀번호 변경</button>
                     </div>
+                  </Box>
+                </div>
+              </div>
 
-                    {
-                      currentPasswordIsTrue === false && (
-                        <div className={'alertMessage'}>
-                          현재 비밀번호와 일치하지 않습니다.
-                        </div>
-                      )
-                    }
-
-                    <div style={{marginTop: '9px'}}>
-                      <span>새 비밀번호 </span>
-                      <input style={{marginLeft: '48px'}} type={'password'}
-                             onChange={(e) => setNewPassword(e.target.value)}/>
-                      <br/>
-                    </div>
-
-                    {
-                      newPasswordOverFour === false && (
-                        <div className={'alertMessage'}>
-                          비밀번호는 4자 이상이어야 합니다.
-                        </div>
-                      )
-                    }
-
-                    <div style={{marginTop: '9px'}}>
-                      <span>비밀번호 다시 입력 </span>
-                      <input style={{marginLeft: '5px'}} type={'password'}
-                             onChange={(e) => setCheckPassword(e.target.value)}/>
-                      <br/>
-                    </div>
-
-                    {
-                      passwordIsEqual === false && (
-                        <div className={'alertMessage'}>
-                          새 비밀번호와 일치하지 않습니다.
-                        </div>
-                      )
-                    }
-
-                    <button className={'confirmBtn'} onClick={changePassword}>비밀번호 변경</button>
-
-                    <div style={{marginBottom: '20px'}}/>
-                  </div>
-                </td>
-              </tr>
-            </table>
+            </div>
 
           </div>
+
         </main>
       </div>
     </div>

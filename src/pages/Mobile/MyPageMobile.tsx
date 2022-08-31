@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import HamburgerMenu from "../../components/HamburgerMenu";
-import MyPageComponent from "../../components/MyPageComponent";
+import MyPageComponentMobile from "../../components/MyPageComponentMobile";
 
 const MyPageMobile = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
@@ -129,7 +129,7 @@ const MyPageMobile = () => {
                 </div>
               </div>
 
-              <MyPageComponent/>
+              <MyPageComponentMobile/>
 
               <div>
                 <div className={'componentTitle'}>비밀번호 변경</div>
