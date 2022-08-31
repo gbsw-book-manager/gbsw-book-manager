@@ -25,7 +25,7 @@ const MyPageComponent = () => {
            <div>
              {Object.values(data).map((log: any, index) => (
                <ul key={index}>
-                 <li>{log.title} ({log.publisher})</li>
+                 <li>{log.book.title} ({log.book.publisher})</li>
                </ul>
              ))}
            </div>

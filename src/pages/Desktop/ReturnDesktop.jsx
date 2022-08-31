@@ -86,21 +86,22 @@ const ReturnDesktop = () => {
                         <th style={{width: '300px'}}>제목</th>
                         <th>저자</th>
                         <th>출판사</th>
+                        <th>대출 날짜</th>
                       </tr>
                       </thead>
                       <tbody>
                       {Object.values(data).map((log, index) => (
                         <tr key={index}>
                           <td className="checkbox-td">
-                            <input type="checkbox" name={`${log.title}`} className="checkbox-box"
-                                   id={log.title} onChange={(e) => {
-                              checkEvent(e.currentTarget.checked, log.title)
+                            <input type="checkbox" className="checkbox-box" onChange={(e) => {
+                              checkEvent(e.currentTarget.checked, log.book.title)
                             }}
-                                   checked={!checkedInputs.includes(log.title) ? false : true}/>
+                                   checked={!checkedInputs.includes(log.book.title) ? false : true}/>
                           </td>
-                          <td>{log.title}</td>
-                          <td>{log.author}</td>
-                          <td>{log.publisher}</td>
+                          <td>{log.book.title}</td>
+                          <td>{log.book.author}</td>
+                          <td>{log.book.publisher}</td>
+                          <td>{log.loanDate}</td>
                         </tr>
                       ))}
                       </tbody>
@@ -116,7 +117,7 @@ const ReturnDesktop = () => {
 
             {
               data.length === 0 && (
-                <div className={'noDataBox'}>
+                <div className={'noDataBox'} style={{ width: '500px' }}>
                   <div>현재 대출 한 도서 목록이 없습니다.</div>
                   <button onClick={() => window.location.reload()} className={'reloadBtn'}>새로고침</button>
                 </div>

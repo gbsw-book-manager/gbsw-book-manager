@@ -1,7 +1,6 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../styles/Register.scss'
 import HamburgerMenu from "../../components/HamburgerMenu";
-import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { getCookie } from "../../utils/cookies";
 import Swal from "sweetalert2";

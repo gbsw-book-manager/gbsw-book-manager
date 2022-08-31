@@ -138,7 +138,7 @@ const MyPageMobile = () => {
 
                   <div className="form_group">
                     <label htmlFor="name" className="form_label">현재 비밀번호</label>
-                    <input type="password" className="form_input" id="name" placeholder="Full name"
+                    <input type="password" className="form_input" id="name" placeholder="Current Password"
                            style={{width: '40vw'}} required={true}
                            onChange={(e) => setCurrentPassword(e.target.value)}
                     />
@@ -153,7 +153,7 @@ const MyPageMobile = () => {
 
                   <div className="form_group">
                     <label htmlFor="name" className="form_label">새 비밀번호</label>
-                    <input type="password" className="form_input" id="name" placeholder="Full name"
+                    <input type="password" className="form_input" id="name" placeholder="New Password"
                            style={{width: '40vw'}} required={true}
                            onChange={(e) => setNewPassword(e.target.value)}
                     />
@@ -168,7 +168,7 @@ const MyPageMobile = () => {
 
                   <div className="form_group">
                     <label htmlFor="name" className="form_label">비밀번호 다시 입력</label>
-                    <input type="password" className="form_input" id="name" placeholder="Full name"
+                    <input type="password" className="form_input" id="name" placeholder="Check Password"
                            style={{width: '40vw'}} required={true}
                            onChange={(e) => setCheckPassword(e.target.value)}
                     />

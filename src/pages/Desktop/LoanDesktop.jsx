@@ -36,7 +36,15 @@ const LoanDesktop = () => {
       "bookId": checkedInputs
     }
 
-    if (checkedInputs.length > 0) {
+    if (checkedInputs.length > 5) {
+      Swal.fire({
+        title: 'Error!',
+        text: '최대 대출 도서 수는 5권입니다.',
+        icon: 'error',
+        confirmButtonText: '확인'
+      })
+    }
+    else if (checkedInputs.length > 0) {
       axios
         .post('http://localhost:8080/api/book/loan', JSON.stringify(data), {
           headers: {
@@ -53,7 +61,7 @@ const LoanDesktop = () => {
         } else {
           Swal.fire({
             title: 'Error!',
-            text: res.data,
+            text: '대출 신청을 한 책, 이미 대출 한 책, 수량 부족 또는 대출한 도서의 수가 5권 이상입니다.',
             icon: 'error',
             confirmButtonText: '확인'
           })
