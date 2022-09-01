@@ -42,7 +42,7 @@ const MyPageDesktop = () => {
       }
     }
 
-    axios.get(`http://localhost:8080/api/user?id=${getCookie('id')}`)
+    axios.get(`http://localhost:8888/api/user?id=${getCookie('id')}`)
       .then((res) => {
         setNumberOfBooks(res.data.length)
       })
@@ -68,7 +68,7 @@ const MyPageDesktop = () => {
         "newPasswordCheck": checkPassword
       }
       axios
-        .put('http://localhost:8080/api/update-password', JSON.stringify(data), {
+        .put('http://localhost:8888/api/update-password', JSON.stringify(data), {
           headers: {
             "Content-Type": 'application/json'
           },

@@ -13,7 +13,7 @@ import { getCookie } from "../../utils/cookies";
 const ReturnRequestListDesktop = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
-  const {data, error} = useSWR('http://localhost:8080/api/book/return', fetcher)
+  const {data, error} = useSWR('http://localhost:8888/api/book/return', fetcher)
 
   useEffect(() => {
     if (getCookie('access_token') !== undefined) {
@@ -27,7 +27,7 @@ const ReturnRequestListDesktop = () => {
 
   const returnApproval = (id: number) => {
     axios
-      .delete(`http://localhost:8080/api/book/return?id=${id}`)
+      .delete(`http://localhost:8888/api/book/return?id=${id}`)
       .then((res) => {
         Swal.fire({
           title: '도서 반납 승인이 완료되었습니다.',

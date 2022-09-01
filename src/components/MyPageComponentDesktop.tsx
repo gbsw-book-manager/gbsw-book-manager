@@ -5,7 +5,7 @@ import fetcher from "../utils/fetcher";
 import Loading from "./Loading";
 
 const MyPageComponentDesktop = () => {
-  const {data, error} = useSWR(`http://localhost:8080/api/user?id=${getCookie('id')}`, fetcher)
+  const {data, error} = useSWR(`http://localhost:8888/api/user?id=${getCookie('id')}`, fetcher)
 
   if (error) {
     return <div>ERROR</div>

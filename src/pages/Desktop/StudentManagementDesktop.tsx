@@ -11,7 +11,7 @@ import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { getCookie } from "../../utils/cookies";
 
 const StudentManagementDesktop = () => {
-  const {data, error} = useSWR('http://localhost:8080/api/users', fetcher)
+  const {data, error} = useSWR('http://localhost:8888/api/users', fetcher)
 
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
@@ -26,7 +26,7 @@ const StudentManagementDesktop = () => {
   }, [])
 
   const getUserLoanBooks = (name: string, id: number) => {
-    axios.get(`http://localhost:8080/api/user?id=${id}`)
+    axios.get(`http://localhost:8888/api/user?id=${id}`)
       .then((res) => {
         if (res.data.length === 0) {
           Swal.fire({

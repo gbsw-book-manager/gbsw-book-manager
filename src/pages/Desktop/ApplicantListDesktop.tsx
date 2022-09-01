@@ -13,7 +13,7 @@ import { getCookie } from "../../utils/cookies";
 const ApplicantListDesktop = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
-  const {data, error} = useSWR('http://localhost:8080/api/book/application', fetcher)
+  const {data, error} = useSWR('http://localhost:8888/api/book/application', fetcher)
 
   useEffect(() => {
     if (getCookie('access_token') !== undefined) {
@@ -27,7 +27,7 @@ const ApplicantListDesktop = () => {
 
   const deleteApplication = (id: number) => {
     axios
-      .delete(`http://localhost:8080/api/book/application?id=${id}`)
+      .delete(`http://localhost:8888/api/book/application?id=${id}`)
       .then(() => {
         Swal.fire({
           text: '삭제가 완료되었습니다.',

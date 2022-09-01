@@ -11,7 +11,7 @@ import axios from "axios";
 const LoanMobile = () => {
   const [checkedInputs, setCheckedInputs] = useState([]);
 
-  const {data, error} = useSWR('http://localhost:8080/api/book', fetcher)
+  const {data, error} = useSWR('http://localhost:8888/api/book', fetcher)
 
   const checkEvent = (checked, id) => {
     if (checked) {
@@ -47,7 +47,7 @@ const LoanMobile = () => {
     }
     else if (checkedInputs.length > 0) {
       axios
-        .post('http://localhost:8080/api/book/loan', JSON.stringify(data), {
+        .post('http://localhost:8888/api/book/loan', JSON.stringify(data), {
           headers: {
             "Content-Type": `application/json`,
           },

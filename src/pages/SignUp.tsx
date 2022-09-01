@@ -45,7 +45,7 @@ const SignUp = () => {
   }
 
   const emailHandler = async () => {
-    let url = `http://localhost:8080/api/certification-email?email=${email}&name=${name}`
+    let url = `http://localhost:8888/api/certification-email?email=${email}&name=${name}`
     await fetch(url, {
       method: 'POST',
       headers: {
@@ -68,7 +68,7 @@ const SignUp = () => {
       console.log(data)
 
       axios
-        .post('http://localhost:8080/api/sign-up', JSON.stringify(data), {
+        .post('http://localhost:8888/api/sign-up', JSON.stringify(data), {
           headers: {
             "Content-Type": `application/json`,
           },

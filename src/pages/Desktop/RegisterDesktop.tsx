@@ -30,7 +30,7 @@ const RegisterDesktop = () => {
       }
 
       axios
-        .post('http://localhost:8080/api/book/application', JSON.stringify(data), {
+        .post('http://localhost:8888/api/book/application', JSON.stringify(data), {
           headers: {
             "Content-Type": `application/json`,
           },
