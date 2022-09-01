@@ -16,7 +16,7 @@ const MyPageComponentDesktop = () => {
       <div className={'myPageCompoPC'}>
         {
           data.length === 0 && (
-            <div style={{ marginTop: '60px', textAlign: 'center' }}>현대 대출 된 도서 목록이 없습니다.</div>
+            <div style={{ marginTop: '25%', textAlign: 'center', fontSize: '20px' }}>현대 대출 된 도서 목록이 없습니다.</div>
           )
         }
         {

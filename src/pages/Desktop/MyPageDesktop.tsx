@@ -11,13 +11,13 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
 const MyPageDesktop = () => {
-  // const [currentPassword, setCurrentPassword] = useState<string>('')
-  // const [newPassword, setNewPassword] = useState<string>('')
-  // const [checkPassword, setCheckPassword] = useState<string>('')
-  //
-  // const [currentPasswordIsTrue, setCurrentPasswordIsTrue] = useState<boolean>(true)
-  // const [newPasswordOverFour, setNewPasswordOverFour] = useState<boolean>(true)
-  // const [passwordIsEqual, setPasswordIsEqual] = useState<boolean>(true)
+  const [currentPassword, setCurrentPassword] = useState<string>('')
+  const [newPassword, setNewPassword] = useState<string>('')
+  const [checkPassword, setCheckPassword] = useState<string>('')
+
+  const [currentPasswordIsTrue, setCurrentPasswordIsTrue] = useState<boolean>(true)
+  const [newPasswordOverFour, setNewPasswordOverFour] = useState<boolean>(true)
+  const [passwordIsEqual, setPasswordIsEqual] = useState<boolean>(true)
 
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
   const [numberOfBooks, setNumberOfBooks] = useState<number>(0)
@@ -51,49 +51,49 @@ const MyPageDesktop = () => {
       })
   }, [])
 
-  // const changePassword = () => {
-  //   if (newPassword.length < 4) {
-  //     setNewPasswordOverFour(false)
-  //   }
-  //
-  //   if (newPassword !== checkPassword) {
-  //     setPasswordIsEqual(false)
-  //   }
-  //
-  //   if (newPassword.length > 3 && newPassword === checkPassword) {
-  //     let data = {
-  //       "username": getCookie('email'),
-  //       "password": currentPassword,
-  //       "newPassword": newPassword,
-  //       "newPasswordCheck": checkPassword
-  //     }
-  //     axios
-  //       .put('http://localhost:8080/api/update-password', JSON.stringify(data), {
-  //         headers: {
-  //           "Content-Type": 'application/json'
-  //         },
-  //       })
-  //       .then((res) => {
-  //         if (res.data) {
-  //           setCurrentPasswordIsTrue(false)
-  //         } else if (!res.data) {
-  //           Swal.fire({
-  //             title: 'Success',
-  //             text: '비밀번호 변경이 완료되었습니다. 다시 로그인해 주세요.',
-  //             icon: 'success',
-  //             confirmButtonText: '확인'
-  //           }).then(() => {
-  //             removeCookie('access_token')
-  //             removeCookie('name')
-  //             removeCookie('id')
-  //             removeCookie('email')
-  //             removeCookie('studentId')
-  //             window.location.replace('/')
-  //           })
-  //         }
-  //       })
-  //   }
-  // }
+  const changePassword = () => {
+    if (newPassword.length < 4) {
+      setNewPasswordOverFour(false)
+    }
+
+    if (newPassword !== checkPassword) {
+      setPasswordIsEqual(false)
+    }
+
+    if (newPassword.length > 3 && newPassword === checkPassword) {
+      let data = {
+        "username": getCookie('email'),
+        "password": currentPassword,
+        "newPassword": newPassword,
+        "newPasswordCheck": checkPassword
+      }
+      axios
+        .put('http://localhost:8080/api/update-password', JSON.stringify(data), {
+          headers: {
+            "Content-Type": 'application/json'
+          },
+        })
+        .then((res) => {
+          if (res.data) {
+            setCurrentPasswordIsTrue(false)
+          } else if (!res.data) {
+            Swal.fire({
+              title: 'Success',
+              text: '비밀번호 변경이 완료되었습니다. 다시 로그인해 주세요.',
+              icon: 'success',
+              confirmButtonText: '확인'
+            }).then(() => {
+              removeCookie('access_token')
+              removeCookie('name')
+              removeCookie('id')
+              removeCookie('email')
+              removeCookie('studentId')
+              window.location.replace('/')
+            })
+          }
+        })
+    }
+  }
 
   return (
     <div>
@@ -124,7 +124,11 @@ const MyPageDesktop = () => {
               </div>
 
               <div className={'userinfoContainer'}>
-                <div>학번: <span style={{ marginLeft: '100px' }}>{getCookie('studentId')}</span></div>
+                {
+                  !isAdmin && (
+                    <div>학번: <span style={{marginLeft: '100px'}}>{getCookie('studentId')}</span></div>
+                  )
+                }
                 <div>Email: <span style={{ marginLeft: '80px' }}>{getCookie('email')}</span></div>
 
                 {
@@ -151,32 +155,67 @@ const MyPageDesktop = () => {
 
 
                   <Box>
-                    <div>
-                      <div>
+                    <div className={'changePasswordContainer'}>
+
+                      <div className={'changePasswordBox'}>
                         <TextField
                           id="demo-helper-text-aligned"
                           label="현재 비밀번호"
+                          className={'changePasswordField'}
+                          type={'password'}
+                          value={currentPassword}
+                          onChange={(e) => setCurrentPassword(e.target.value)}
                         />
+                        {
+                          currentPasswordIsTrue === false && (
+                            <div className={'falseMessage'} style={{ fontSize: '12px' }}>
+                              현재 비밀번호와 일치하지 않습니다.
+                            </div>
+                          )
+                        }
                       </div>
 
-                      <div>
+                      <div className={'changePasswordBox'}>
                         <TextField
                           id="demo-helper-text-aligned"
                           label="새 비밀번호"
+                          className={'changePasswordField'}
+                          value={newPassword}
+                          type={'password'}
+                          onChange={(e) => setNewPassword(e.target.value)}
                         />
+                        {
+                          newPasswordOverFour === false && (
+                            <div className={'falseMessage'} style={{ fontSize: '12px' }}>
+                              비밀번호는 4자 이상이어야 합니다.
+                            </div>
+                          )
+                        }
                       </div>
 
-                      <div>
+                      <div className={'changePasswordBox'}>
                         <TextField
                           id="demo-helper-text-aligned"
                           label="비밀번호 다시 입력"
+                          className={'changePasswordField'}
+                          type={'password'}
+                          value={checkPassword}
+                          onChange={(e) => setCheckPassword(e.target.value)}
                         />
+                        {
+                          passwordIsEqual === false && (
+                            <div className={'falseMessage'} style={{ fontSize: '12px' }}>
+                              새 비밀번호와 일치하지 않습니다.
+                            </div>
+                          )
+                        }
                       </div>
 
+                      <button className={'changePasswordBtn'} onClick={changePassword}>비밀번호 변경</button>
 
-                      <button>비밀번호 변경</button>
                     </div>
                   </Box>
+
                 </div>
               </div>
 

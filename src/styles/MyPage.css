@@ -196,8 +196,55 @@
     width: 90%;
     padding: 5px 0px 5px 5px;
     margin-bottom: 5px;
-    border-bottom: 1px solid #efefef;
-    font-size: 15px;
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+}
+
+.changePasswordField {
+    margin-top: 80px;
+    width: 400px;
+}
+
+.changePasswordContainer {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: 320px;
+}
+
+.changePasswordBox {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: 93px;
+}
+
+.changePasswordBtn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    margin-top: 5px;
+    display: block;
+    background: #73bdfa;
+    width: 80px;
+    height: 35px;
+    font-size: 11px;
+    border-radius: 4px;
+    color: #1c1919;
+}
+
+.changePasswordBtn:hover {
+    background: #5e9cce;
+    cursor: pointer;
+}
+
+.falseMessage {
+    float: left;
+    color: #d72020;
+    margin-top: 3px;
+    margin-left: 3px;
 }
 
 @media (max-width: 900px) {
