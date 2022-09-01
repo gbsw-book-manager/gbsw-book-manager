@@ -70,7 +70,7 @@ const BookManagementDesktop = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:8888/api/book?id=${id}`)
+          .delete(`https://bookmanager-api.jinhyo.dev/api/book?id=${id}`)
           .then((res) => {
             if (res.data.length === 0) {
               Swal.fire( {

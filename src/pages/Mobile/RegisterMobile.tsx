@@ -31,7 +31,7 @@ const RegisterMobile = () => {
       }
 
       axios
-        .post('http://localhost:8888/api/book/application', JSON.stringify(data), {
+        .post('https://bookmanager-api.jinhyo.dev/api/book/application', JSON.stringify(data), {
           headers: {
             "Content-Type": `application/json`,
           },

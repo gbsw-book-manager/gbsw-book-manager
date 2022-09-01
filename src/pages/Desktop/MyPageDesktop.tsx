@@ -42,7 +42,7 @@ const MyPageDesktop = () => {
       }
     }
 
-    axios.get(`http://localhost:8888/api/user?id=${getCookie('id')}`)
+    axios.get(`https://bookmanager-api.jinhyo.dev/api/user?id=${getCookie('id')}`)
       .then((res) => {
         setNumberOfBooks(res.data.length)
       })
@@ -68,7 +68,7 @@ const MyPageDesktop = () => {
         "newPasswordCheck": checkPassword
       }
       axios
-        .put('http://localhost:8888/api/update-password', JSON.stringify(data), {
+        .put('https://bookmanager-api.jinhyo.dev/api/update-password', JSON.stringify(data), {
           headers: {
             "Content-Type": 'application/json'
           },

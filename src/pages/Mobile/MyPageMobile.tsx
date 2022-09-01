@@ -60,7 +60,7 @@ const MyPageMobile = () => {
         "newPasswordCheck": checkPassword
       }
       axios
-        .put('http://localhost:8888/api/update-password', JSON.stringify(data), {
+        .put('https://bookmanager-api.jinhyo.dev/api/update-password', JSON.stringify(data), {
           headers: {
             "Content-Type": 'application/json'
           },

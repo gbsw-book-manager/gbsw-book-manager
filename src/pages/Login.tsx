@@ -14,7 +14,7 @@ const Login = () => {
   const loginHandler = () => {
     axios({
       method: "post",
-      url: "http://localhost:8888/api/login",
+      url: "https://bookmanager-api.jinhyo.dev/api/login",
       data: qs.stringify({
         username: id,
         password: password,

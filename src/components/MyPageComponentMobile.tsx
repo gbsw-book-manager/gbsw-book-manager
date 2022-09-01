@@ -5,7 +5,7 @@ import fetcher from "../utils/fetcher";
 import Loading from "./Loading";
 
 const MyPageComponentMobile = () => {
-  const {data, error} = useSWR(`http://localhost:8888/api/user?id=${getCookie('id')}`, fetcher)
+  const {data, error} = useSWR(`https://bookmanager-api.jinhyo.dev/api/user?id=${getCookie('id')}`, fetcher)
 
   if (error) {
     return <div>ERROR</div>

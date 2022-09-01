@@ -15,7 +15,7 @@ const LoanRequestListDesktop = () => {
 
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
-  const {data, error} = useSWR('http://localhost:8888/api/book/loan', fetcher)
+  const {data, error} = useSWR('https://bookmanager-api.jinhyo.dev/api/book/loan', fetcher)
 
   useEffect(() => {
     if (getCookie('access_token') !== undefined) {
@@ -29,7 +29,7 @@ const LoanRequestListDesktop = () => {
 
   const loanApproval = (id: number) => {
     axios
-      .post(`http://localhost:8888/api/book/loan/approval?id=${id}`)
+      .post(`https://bookmanager-api.jinhyo.dev/api/book/loan/approval?id=${id}`)
       .then((res) => {
         Swal.fire({
           title: 'Success',
@@ -43,7 +43,7 @@ const LoanRequestListDesktop = () => {
   }
 
   const deleteLoanRequest = (id: number) => {
-    axios.delete(`http://localhost:8888/api/book/loan/refuse?id=${id}`)
+    axios.delete(`https://bookmanager-api.jinhyo.dev/api/book/loan/refuse?id=${id}`)
       .then((res) => {
         Swal.fire({
           title: 'Success',

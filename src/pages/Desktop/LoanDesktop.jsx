@@ -11,7 +11,7 @@ import {getCookie} from "../../utils/cookies";
 const LoanDesktop = () => {
   const [checkedInputs, setCheckedInputs] = useState([]);
 
-  const {data, error} = useSWR('http://localhost:8888/api/book', fetcher)
+  const {data, error} = useSWR('https://bookmanager-api.jinhyo.dev/api/book', fetcher)
 
   const checkEvent = (checked, id) => {
     if (checked) {
@@ -46,7 +46,7 @@ const LoanDesktop = () => {
     }
     else if (checkedInputs.length > 0) {
       axios
-        .post('http://localhost:8888/api/book/loan', JSON.stringify(data), {
+        .post('https://bookmanager-api.jinhyo.dev/api/book/loan', JSON.stringify(data), {
           headers: {
             "Content-Type": `application/json`,
           },

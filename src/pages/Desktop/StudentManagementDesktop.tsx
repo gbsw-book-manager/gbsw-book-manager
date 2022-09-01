@@ -26,7 +26,7 @@ const StudentManagementDesktop = () => {
   }, [])
 
   const getUserLoanBooks = (name: string, id: number) => {
-    axios.get(`http://localhost:8888/api/user?id=${id}`)
+    axios.get(`https://bookmanager-api.jinhyo.dev/api/user?id=${id}`)
       .then((res) => {
         if (res.data.length === 0) {
           Swal.fire({
