@@ -53,7 +53,7 @@ const BookManagementDesktop = () => {
   }, [])
 
   const [showEditBox, setShowEditBox] = useState<boolean>(false)
-  const {data, error} = useSWR('http://localhost:8888/api/book', fetcher)
+  const {data, error} = useSWR('https://bookmanager-api.jinhyo.dev/api/book', fetcher)
 
   const deleteItem = (id: string, title: string) => {
     Swal.fire({
@@ -124,7 +124,7 @@ const BookManagementDesktop = () => {
             "quantityleft": quantityLeft.length === 0 ? Number(placeHolderQuantityLeft) : quantityLeft
           }
           axios
-            .put('http://localhost:8888/api/book', JSON.stringify(data), {
+            .put('https://bookmanager-api.jinhyo.dev/api/book', JSON.stringify(data), {
               headers: {
                 "Content-Type": `application/json`,
               },

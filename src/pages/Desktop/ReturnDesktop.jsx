@@ -10,7 +10,7 @@ import {getCookie} from "../../utils/cookies";
 
 const ReturnDesktop = () => {
   const [checkedInputs, setCheckedInputs] = useState([]);
-  const {data, error} = useSWR(`http://localhost:8888/api/user?id=${getCookie('id')}`, fetcher)
+  const {data, error} = useSWR(`https://bookmanager-api.jinhyo.dev/api/user?id=${getCookie('id')}`, fetcher)
 
   const checkEvent = (checked, id) => {
     if (checked) {

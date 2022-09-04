@@ -11,7 +11,7 @@ import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { getCookie } from "../../utils/cookies";
 
 const StudentManagementDesktop = () => {
-  const {data, error} = useSWR('http://localhost:8888/api/users', fetcher)
+  const {data, error} = useSWR('https://bookmanager-api.jinhyo.dev/api/users', fetcher)
 
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
