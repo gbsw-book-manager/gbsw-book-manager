@@ -76,9 +76,11 @@
     width: 90px;
     height: 48px;
     margin-top: 20px;
-    font-weight: bold;
     background-color: #03c75a;
     border-radius: 5px;
+    font-size: 12px;
+    font-weight: 30;
+    font-family: 'NanumSquareRound';
 }
 
 .getCodeBtn:hover {
@@ -149,13 +151,15 @@
     }
 
     .signup-userid-form {
-        width: 220px;
+        width: 200px;
     }
 
     .getCodeBtn {
         margin-left: 0px;
         width: 75px;
         font-size: 12px;
+        height: 52px;
+        margin-left: 10px;
     }
 
     .emailInputTag {

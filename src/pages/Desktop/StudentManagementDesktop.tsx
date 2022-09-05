@@ -36,7 +36,7 @@ const StudentManagementDesktop = () => {
         } else {
           let books: string = ''
           for (let i = 0; i < res.data.length; i++) {
-            books += res.data[i].title + ', '
+            books += res.data[i].book.title + ', '
           }
 
           books = books.slice(0, -1);
