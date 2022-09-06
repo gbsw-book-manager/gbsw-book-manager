@@ -30,11 +30,14 @@ const SignUp = () => {
   }
 
   const isEmailFilled = () => {
-    if (isEmailOkay) {
-      setClicked(true)
-      emailHandler()
+    if (!name) {
+      setIsEmailOkay('notFilled-name')
+    } else if (!studentId) {
+      setIsEmailOkay('notFilled-id')
+    } else if (!email) {
+      setIsEmailOkay('notFilled-email')
     } else {
-      setClicked(false)
+      if (isEmailOkay) emailHandler()
     }
   }
 
@@ -44,14 +47,27 @@ const SignUp = () => {
     }
   }
 
-  const emailHandler = async () => {
-    let url = `https://bookmanager-api.jinhyo.dev/api/certification-email?email=${email}&name=${name}`
-    await fetch(url, {
-      method: 'POST',
+  const emailHandler = () => {
+    let data = {
+      'email': email,
+      'name': name,
+      'studentId': studentId
+    }
+    axios.post('https://bookmanager-api.jinhyo.dev/api/certification-email', JSON.stringify(data), {
       headers: {
         'Content-Type': 'application/json',
       }
     })
+      .then((res) => {
+        if (res.data === '이메일 인증 성공') {
+          setClicked(true)
+        } else if (res.data.log === '학번이 이미 존재함') {
+          setIsEmailOkay('idExist')
+        } else if (res.data.log === '이메일이 이미 존재함') {
+          setIsEmailOkay('emailExist')
+        }
+      })
+      .catch((err) => console.log(err))
   }
 
   const loginHandler = async () => {
@@ -65,7 +81,6 @@ const SignUp = () => {
         "password": password,
         "code": code
       }
-      console.log(data)
 
       axios
         .post('https://bookmanager-api.jinhyo.dev/api/sign-up', JSON.stringify(data), {
@@ -110,7 +125,6 @@ const SignUp = () => {
           maxLength={4}
           value={name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-          onKeyPress={handleOnKeyPress}
         />
 
         <input
@@ -122,7 +136,6 @@ const SignUp = () => {
           value={studentId}
           onChange={checkStudentId}
           style={{marginTop: '20px'}}
-          onKeyPress={handleOnKeyPress}
         />
 
         <div className={'emailForm'}>
@@ -139,19 +152,43 @@ const SignUp = () => {
                 checkEmail(e)
                 setEmail(e.target.value)
               }}
-              onKeyPress={handleOnKeyPress}
             />
             <button className={'getCodeBtn'} onClick={isEmailFilled}>인증번호 받기</button>
           </div>
 
           {
             isEmailOkay === false && (
-              <div style={{
-                marginTop: '3px',
-                marginLeft: '3px',
-                color: '#e12a2a',
-                fontSize: '9px'
-              }}>이메일 형식이 올바르지 않습니다.</div>
+              <div className={'notFilled'}>이메일 형식이 올바르지 않습니다.</div>
+            )
+          }
+
+          {
+            isEmailOkay === 'idExist' && (
+              <div className={'notFilled'}>이미 존재하는 학번입니다.</div>
+            )
+          }
+
+          {
+            isEmailOkay === 'emailExist' && (
+              <div className={'notFilled'}>이미 존재하는 이메일입니다.</div>
+            )
+          }
+
+          {
+            isEmailOkay === 'notFilled-name' && (
+              <div className={'notFilled'}>이름을 입력해 주세요.</div>
+            )
+          }
+
+          {
+            isEmailOkay === 'notFilled-id' && (
+              <div className={'notFilled'}>학번을 입력해 주세요.</div>
+            )
+          }
+
+          {
+            isEmailOkay === 'notFilled-email' && (
+              <div className={'notFilled'}>메일을 입력해 주세요.</div>
             )
           }
 
@@ -181,6 +218,7 @@ const SignUp = () => {
           value={password}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           onKeyPress={handleOnKeyPress}
+          style={{marginTop: '10px'}}
         />
 
         {
@@ -200,7 +238,7 @@ const SignUp = () => {
 
       </div>
 
-
+      <div className={'mobileGap'}/>
     </div>
   )
 }

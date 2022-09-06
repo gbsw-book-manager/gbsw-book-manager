@@ -93,7 +93,7 @@
 }
 
 .signUpContainer {
-    margin-top: 30px;
+    margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
     width: 415px;
@@ -114,6 +114,13 @@
 
 .LogintopGap {
     margin-top: 16%;
+}
+
+.notFilled {
+    margin-top: 3px;
+    margin-left: 3px;
+    color: #e12a2a;
+    font-size: 10px;
 }
 
 @media (max-width: 900px) {
@@ -151,13 +158,13 @@
     }
 
     .signup-userid-form {
-        width: 200px;
+        width: 220px;
     }
 
     .getCodeBtn {
         margin-left: 0px;
-        width: 75px;
-        font-size: 12px;
+        width: 60px;
+        font-size: 10px;
         height: 52px;
         margin-left: 10px;
     }
@@ -172,5 +179,13 @@
 
     .LogintopGap {
         margin-top: 20vh;
+    }
+
+    .mobileGap {
+        margin-bottom: 15vh;
+    }
+
+    .notFilled {
+        margin-top: 5px;
     }
 }
