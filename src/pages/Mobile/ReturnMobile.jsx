@@ -97,6 +97,7 @@ const ReturnMobile = () => {
                         <th>제목</th>
                         <th>저자</th>
                         <th>출판사</th>
+                        <th>대출 날짜</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -105,13 +106,14 @@ const ReturnMobile = () => {
                           <td className="checkbox-td">
                             <input type="checkbox" name={`${log.title}`} className="checkbox-box"
                                    id={log.title} onChange={(e) => {
-                              checkEvent(e.currentTarget.checked, log.title)
+                              checkEvent(e.currentTarget.checked, log.book.title)
                             }}
-                                   checked={!checkedInputs.includes(log.title) ? false : true}/>
+                                   checked={!checkedInputs.includes(log.book.title) ? false : true}/>
                           </td>
-                          <td>{log.title}</td>
-                          <td>{log.author}</td>
-                          <td>{log.publisher}</td>
+                          <td>{log.book.title}</td>
+                          <td>{log.book.author}</td>
+                          <td>{log.book.publisher}</td>
+                          <td>{log.loanDate}</td>
                         </tr>
                       ))}
                       </tbody>
