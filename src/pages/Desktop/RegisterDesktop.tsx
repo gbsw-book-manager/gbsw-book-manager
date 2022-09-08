@@ -13,38 +13,42 @@ const RegisterDesktop = () => {
 
   useEffect(() => {
     if (getCookie('access_token') === undefined) {
-      Swal.fire( {
-        title: '로그인 후 이용해 주세요.' ,
+      Swal.fire({
+        title: '로그인 후 이용해 주세요.',
         confirmButtonText: '확인',
-      }).then(() => {window.location.replace('/')})
+      }).then(() => {
+        window.location.replace('/')
+      })
     }
   }, [])
 
   const LoadData = () => {
-    if (title.length > 0 && url.length > 0) {
-      let data = {
-        'identifyId': getCookie('id'),
-        'applicant': getCookie('name'),
-        "title": title,
-        "url": url
-      }
+    if (getCookie('access_token') !== undefined) {
+      if (title.length > 0 && url.length > 0) {
+        let data = {
+          'identifyId': getCookie('id'),
+          'applicant': getCookie('name'),
+          "title": title,
+          "url": url
+        }
 
-      axios
-        .post('https://bookmanager-api.jinhyo.dev/api/book/application', JSON.stringify(data), {
-          headers: {
-            "Content-Type": `application/json`,
-          },
-        })
-        .then((res) => {
-          Swal.fire({
-            title: 'Success',
-            text: '희망도서 신청이 완료되었습니다.',
-            icon: 'success',
-            confirmButtonText: '확인'
+        axios
+          .post('https://bookmanager-api.jinhyo.dev/api/book/application', JSON.stringify(data), {
+            headers: {
+              "Content-Type": `application/json`,
+            },
           })
-          setTitle('')
-          setUrl('')
-        })
+          .then((res) => {
+            Swal.fire({
+              title: 'Success',
+              text: '희망도서 신청이 완료되었습니다.',
+              icon: 'success',
+              confirmButtonText: '확인'
+            })
+            setTitle('')
+            setUrl('')
+          })
+      }
     }
   }
 

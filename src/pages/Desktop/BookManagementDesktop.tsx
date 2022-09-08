@@ -161,12 +161,12 @@ const BookManagementDesktop = () => {
 
                     <thead>
                     <tr>
-                      <th style={{width: '200px'}}>제목</th>
+                      <th style={{width: '400px'}}>제목</th>
                       <th>저자</th>
                       <th>출판사</th>
                       <th>총 수량</th>
                       <th>남은 수량</th>
-                      <th style={{width: '120px'}}>관리</th>
+                      <th style={{width: '200px'}}>관리</th>
                     </tr>
                     </thead>
 

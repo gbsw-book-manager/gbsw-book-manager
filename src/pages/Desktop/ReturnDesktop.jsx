@@ -45,16 +45,16 @@ const ReturnDesktop = () => {
     }
   }
 
-  useEffect(() => {
-    if (getCookie('access_token') === undefined) {
-      Swal.fire({
-        title: '로그인 후 이용해 주세요.',
-        confirmButtonText: '확인',
-      }).then(() => {
-        window.location.replace('/')
-      })
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (getCookie('access_token') === undefined) {
+  //     Swal.fire({
+  //       title: '로그인 후 이용해 주세요.',
+  //       confirmButtonText: '확인',
+  //     }).then(() => {
+  //       window.location.replace('/')
+  //     })
+  //   }
+  // }, [])
 
   if (error) {
     return <div>ERROR</div>
@@ -98,7 +98,7 @@ const ReturnDesktop = () => {
                             }}
                                    checked={!checkedInputs.includes(log.book.title) ? false : true}/>
                           </td>
-                          <td>{log.book.title}</td>
+                          <td style={{ width: '400px' }}>{log.book.title}</td>
                           <td>{log.book.author}</td>
                           <td>{log.book.publisher}</td>
                           <td>{log.loanDate}</td>
@@ -117,7 +117,7 @@ const ReturnDesktop = () => {
 
             {
               data.length === 0 && (
-                <div className={'noDataBox'} style={{ width: '500px' }}>
+                <div className={'noDataBox'} style={{ width: '50vw' }}>
                   <div>현재 대출 한 도서 목록이 없습니다.</div>
                   <button onClick={() => window.location.reload()} className={'reloadBtn'}>새로고침</button>
                 </div>

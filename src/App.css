@@ -8,7 +8,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
-
 .loginContainer {
     margin-top: 30px;
     width: 415px;
@@ -255,6 +254,7 @@ section {
 
     .applicantBtnNotActive {
         background: #ccc;
+        color: #000;
     }
 
     .applicantBtnActive {

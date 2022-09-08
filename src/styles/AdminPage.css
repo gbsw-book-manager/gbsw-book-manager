@@ -49,6 +49,7 @@
 }
 
 .addBookBtnNotActive {
+    color: #000;
     background-color: #ccc;
 }
 
@@ -66,9 +67,10 @@
     background: #d92312;
     color: #fff;
     border: none;
-    width: 50px;
+    width: 55px;
     height: 23px;
     border-radius: 3px;
+    font-size: 13px;
 }
 
 .deleteBtn:hover {
@@ -77,11 +79,12 @@
 }
 
 .editBtn {
+    font-size: 13px;
     margin-left: 6px;
     background: #2d80ea;
     color: #fff;
     border: none;
-    width: 50px;
+    width: 55px;
     height: 23px;
     border-radius: 3px;
 }
@@ -95,7 +98,7 @@
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    width: 80vw;
+    width: 90%;
     height: 200px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
@@ -103,9 +106,9 @@
 .editTextFieldContainer {
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
+    width: 55vw;
     height: 50px;
-    max-width: 790px;
+    max-width: 900px;
 }
 
 .editBtnContainer {
@@ -115,7 +118,7 @@
 }
 
 .number-textarea {
-    width: 65px;
+    width: 70px;
 }
 
 .editBtnContainer button {
