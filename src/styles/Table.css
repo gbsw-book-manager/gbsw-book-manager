@@ -81,6 +81,7 @@ tr {
 }
 
 .btnNotActive {
+    color: #000;
     background-color: #ccc;
 }
 
