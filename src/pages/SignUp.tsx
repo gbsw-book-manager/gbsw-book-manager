@@ -127,6 +127,12 @@ const SignUp = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
         />
 
+        {
+          isEmailOkay === 'notFilled-name' && (
+            <div className={'notFilled'}>이름을 입력해 주세요.</div>
+          )
+        }
+
         <input
           className="form user-student-id"
           placeholder="학번"
@@ -137,6 +143,18 @@ const SignUp = () => {
           onChange={checkStudentId}
           style={{marginTop: '20px'}}
         />
+
+        {
+          isEmailOkay === 'idExist' && (
+            <div className={'notFilled'}>이미 존재하는 학번입니다.</div>
+          )
+        }
+
+        {
+          isEmailOkay === 'notFilled-id' && (
+            <div className={'notFilled'}>학번을 입력해 주세요.</div>
+          )
+        }
 
         <div className={'emailForm'}>
 
@@ -163,26 +181,8 @@ const SignUp = () => {
           }
 
           {
-            isEmailOkay === 'idExist' && (
-              <div className={'notFilled'}>이미 존재하는 학번입니다.</div>
-            )
-          }
-
-          {
             isEmailOkay === 'emailExist' && (
               <div className={'notFilled'}>이미 존재하는 이메일입니다.</div>
-            )
-          }
-
-          {
-            isEmailOkay === 'notFilled-name' && (
-              <div className={'notFilled'}>이름을 입력해 주세요.</div>
-            )
-          }
-
-          {
-            isEmailOkay === 'notFilled-id' && (
-              <div className={'notFilled'}>학번을 입력해 주세요.</div>
             )
           }
 
