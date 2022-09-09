@@ -12,6 +12,7 @@ import { getCookie } from "../../utils/cookies";
 
 const StudentManagementDesktop = () => {
   const {data, error} = useSWR('https://bookmanager-api.jinhyo.dev/api/users', fetcher)
+  console.log(data)
 
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
@@ -83,7 +84,7 @@ const StudentManagementDesktop = () => {
                     {Object.values(data).map((log: any, index) => (
                       <tr key={index}>
                         <td>{log.name}</td>
-                        <td>{log.studen_id}</td>
+                        <td>{log.studentid}</td>
                         <td>{log.username}</td>
                         <td>{log.books.length}권
                           <button onClick={() => getUserLoanBooks(log.name, log.id)}
