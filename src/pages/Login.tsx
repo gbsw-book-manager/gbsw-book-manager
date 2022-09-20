@@ -27,28 +27,28 @@ const Login = () => {
       .then((res) => {
         setCookie('access_token', res.data.access_token, {
           path: '/',
-          secure: 'true',
-          sameSite: 'none',
+          // secure: 'true',
+          // sameSite: 'none',
         })
         setCookie('studentId', res.data.studentId, {
           path: '/',
-          secure: 'true',
-          sameSite: 'none',
+          // secure: 'true',
+          // sameSite: 'none',
         })
         setCookie('name', res.data.name, {
           path: '/',
-          secure: 'true',
-          sameSite: 'none',
+          // secure: 'true',
+          // sameSite: 'none',
         })
         setCookie('email', res.data.username, {
           path: '/',
-          secure: 'true',
-          sameSite: 'none',
+          // secure: 'true',
+          // sameSite: 'none',
         })
         setCookie('id', res.data.id, {
           path: '/',
-          secure: 'true',
-          sameSite: 'none',
+          // secure: 'true',
+          // sameSite: 'none',
         })
         window.location.replace('/')
       })
