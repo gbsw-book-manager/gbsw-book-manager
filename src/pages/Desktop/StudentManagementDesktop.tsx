@@ -12,7 +12,6 @@ import { getCookie } from "../../utils/cookies";
 
 const StudentManagementDesktop = () => {
   const {data, error} = useSWR('https://bookmanager-api.jinhyo.dev/api/users', fetcher)
-  console.log(data)
 
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
@@ -29,7 +28,6 @@ const StudentManagementDesktop = () => {
   const getUserLoanBooks = (name: string, id: number) => {
     axios.get(`https://bookmanager-api.jinhyo.dev/api/user?id=${id}`)
       .then((res) => {
-        console.log(res.data)
         if (res.data.length === 0) {
           Swal.fire({
             title: `${name}님의 대출 도서 정보가 없습니다.`,

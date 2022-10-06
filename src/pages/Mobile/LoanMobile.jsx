@@ -7,9 +7,11 @@ import HamburgerMenu from "../../components/HamburgerMenu";
 import {getCookie} from "../../utils/cookies";
 import Swal from "sweetalert2";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const LoanMobile = () => {
-  const [checkedInputs, setCheckedInputs] = useState([]);
+  const [checkedInputs, setCheckedInputs] = useState([])
+  const [userId, setUserId] = useState('')
 
   const {data, error} = useSWR('https://bookmanager-api.jinhyo.dev/api/book', fetcher)
 
@@ -29,12 +31,15 @@ const LoanMobile = () => {
       }).then(() => {
         window.location.replace('/')
       })
+    } else {
+      let decoded = jwt_decode(getCookie('access_token'))
+      setUserId(decoded.id)
     }
   }, [])
 
   const loanBook = () => {
     let data = {
-      "userId": getCookie('id'),
+      "userId": userId,
       "bookId": checkedInputs
     }
     if (checkedInputs.length > 5) {
@@ -101,8 +106,8 @@ const LoanMobile = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {Object.values(data).map((log) => (
-                  <tr key={1}>
+                {Object.values(data).map((log, index) => (
+                  <tr key={index}>
                     <td className="checkbox-td">
                       <input type="checkbox" name={`${log.title}`} className="checkbox-box"
                              id={log.id} onChange={(e) => {

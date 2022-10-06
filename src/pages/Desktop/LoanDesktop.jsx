@@ -7,9 +7,11 @@ import Loading from "../../components/Loading";
 import axios from "axios";
 import Swal from "sweetalert2";
 import {getCookie} from "../../utils/cookies";
+import jwt_decode from "jwt-decode";
 
 const LoanDesktop = () => {
   const [checkedInputs, setCheckedInputs] = useState([]);
+  const [userId, setUserId] = useState('')
 
   const {data, error} = useSWR('https://bookmanager-api.jinhyo.dev/api/book', fetcher)
 
@@ -27,12 +29,15 @@ const LoanDesktop = () => {
         title: '로그인 후 이용해 주세요.' ,
         confirmButtonText: '확인',
       }).then(() => {window.location.replace('/')})
+    } else {
+      let decoded = jwt_decode(getCookie('access_token'))
+      setUserId(decoded.id)
     }
   }, [])
 
   const loanBook = () => {
     let data = {
-      "userId": getCookie('id'),
+      "userId": userId,
       "bookId": checkedInputs
     }
 

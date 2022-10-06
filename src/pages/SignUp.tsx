@@ -67,7 +67,6 @@ const SignUp = () => {
           setIsEmailOkay('emailExist')
         }
       })
-      .catch((err) => console.log(err))
   }
 
   const loginHandler = async () => {

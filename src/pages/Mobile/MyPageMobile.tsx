@@ -16,7 +16,10 @@ const MyPageMobile = () => {
   const [currentPasswordIsTrue, setCurrentPasswordIsTrue] = useState<boolean>(true)
   const [newPasswordOverFour, setNewPasswordOverFour] = useState<boolean>(true)
   const [passwordIsEqual, setPasswordIsEqual] = useState<boolean>(true)
-
+  const [userId, setUserId] = useState<string>()
+  const [username, setUsername] = useState<string>()
+  const [userEmail, setUserEmail] = useState<string>()
+  const [studentId, setStudentId] = useState<string>()
 
   useEffect(() => {
     if (getCookie('access_token') === undefined) {
@@ -26,16 +29,15 @@ const MyPageMobile = () => {
       }).then(() => {
         window.location.replace('/')
       })
-    }
-  }, [])
-
-  useEffect(() => {
-    if (getCookie('access_token') !== undefined) {
+    } else {
       let decoded: any = jwt_decode(getCookie('access_token'))
-      decoded = decoded.roles
-      if (decoded.includes('ROLE_ADMIN')) {
+      if (decoded.roles.includes('ROLE_ADMIN')) {
         setIsAdmin(true)
       }
+      setUserId(decoded.id)
+      setUsername(decoded.name)
+      setStudentId(decoded.studentId)
+      setUserEmail(decoded.username)
     }
   }, [])
 
@@ -54,7 +56,7 @@ const MyPageMobile = () => {
 
     if (newPassword.length > 3 && newPassword === checkPassword) {
       let data = {
-        "username": getCookie('email'),
+        "username": userEmail,
         "password": currentPassword,
         "newPassword": newPassword,
         "newPasswordCheck": checkPassword
@@ -104,7 +106,7 @@ const MyPageMobile = () => {
 
             <div className={'mypageContainer'}>
 
-              <span>{getCookie('name')}</span>
+              <span>{username}</span>
               <span style={{
                 fontSize: '18px',
                 color: '#ccc'
@@ -117,7 +119,7 @@ const MyPageMobile = () => {
                     textAlign: 'center',
                     fontWeight: 'normal',
                     fontSize: '18px'
-                  }}>{getCookie('studentId')}</div>
+                  }}>{studentId}</div>
                 </div>
                 <div className={'email box'} style={{marginLeft: '10px'}}><span>Email</span>
                   <div style={{
@@ -125,7 +127,7 @@ const MyPageMobile = () => {
                     fontSize: '11.5px',
                     textAlign: 'center',
                     fontWeight: 'normal'
-                  }}>{getCookie('email')}</div>
+                  }}>{userEmail}</div>
                 </div>
               </div>
 

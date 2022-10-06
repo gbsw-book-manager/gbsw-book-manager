@@ -6,10 +6,13 @@ import TextField from "@mui/material/TextField";
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { getCookie } from "../../utils/cookies";
+import jwt_decode from "jwt-decode";
 
 const RegisterDesktop = () => {
   const [title, setTitle] = useState<string>('')
   const [url, setUrl] = useState<string>('')
+  const [userId, setUserId] = useState<string>()
+  const [username, setUsername] = useState<string>()
 
   useEffect(() => {
     if (getCookie('access_token') === undefined) {
@@ -19,6 +22,10 @@ const RegisterDesktop = () => {
       }).then(() => {
         window.location.replace('/')
       })
+    } else {
+      let decoded: any = jwt_decode(getCookie('access_token'))
+      setUserId(decoded.id)
+      setUsername(decoded.name)
     }
   }, [])
 
@@ -26,8 +33,8 @@ const RegisterDesktop = () => {
     if (getCookie('access_token') !== undefined) {
       if (title.length > 0 && url.length > 0) {
         let data = {
-          'identifyId': getCookie('id'),
-          'applicant': getCookie('name'),
+          'identifyId': userId,
+          'applicant': username,
           "title": title,
           "url": url
         }

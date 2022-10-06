@@ -9,15 +9,17 @@ import Buttons from "../components/Buttons"
 import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
 import { getCookie, removeCookie } from "../utils/cookies";
+let decodeToken: any
 
 const Main = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
+  const [username, setUsername] = useState('')
 
   useEffect(() => {
     if (getCookie('access_token') !== undefined) {
-      let decoded: any = jwt_decode(getCookie('access_token'))
-      decoded = decoded.roles
-      if (decoded.includes('ROLE_ADMIN')) {
+      decodeToken = jwt_decode(getCookie('access_token'))
+      setUsername(decodeToken.name)
+      if (decodeToken.roles.includes('ROLE_ADMIN')) {
         setIsAdmin(true)
         window.location.replace('/book-add')
       }
@@ -39,10 +41,6 @@ const Main = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         removeCookie('access_token')
-        removeCookie('name')
-        removeCookie('id')
-        removeCookie('email')
-        removeCookie('studentId')
         window.location.replace('/')
       }
     })
@@ -74,7 +72,7 @@ const Main = () => {
       {
         getCookie('access_token') != null && (
           <div className={'stateBtnContainer'}>
-            <div className={'welcomePhrase'}>{getCookie('name')}님, 반갑습니다 !</div>
+            <div className={'welcomePhrase'}>{username}님, 반갑습니다 !</div>
             <button onClick={logout} className={'logoutBtn'}>Logout</button>
           </div>
         )

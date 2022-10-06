@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { getCookie } from "../utils/cookies";
 import fetcher from "../utils/fetcher";
 import Loading from "./Loading";
+import jwt_decode from "jwt-decode";
 
 const MyPageComponentMobile = () => {
-  const {data, error} = useSWR(`https://bookmanager-api.jinhyo.dev/api/user?id=${getCookie('id')}`, fetcher)
+
+  const [userId, setUserId] = useState<string>('')
+
+  useEffect(() => {
+    let decoded: any = jwt_decode(getCookie('access_token'))
+    setUserId(decoded.id)
+  })
+
+  const {data, error} = useSWR(`https://bookmanager-api.jinhyo.dev/api/user?id=${userId}`, fetcher)
 
   if (error) {
     return <div>ERROR</div>

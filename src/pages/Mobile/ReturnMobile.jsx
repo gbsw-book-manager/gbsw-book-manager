@@ -7,11 +7,27 @@ import HamburgerMenu from "../../components/HamburgerMenu";
 import {getCookie} from "../../utils/cookies";
 import axios from "axios";
 import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 const ReturnMobile = () => {
-  const [checkedInputs, setCheckedInputs] = useState([])
+  const [checkedInputs, setCheckedInputs] = useState([]);
+  const [userId, setUserId] = useState()
+  const [username, setUsername] = useState()
 
-  const {data, error} = useSWR(`https://bookmanager-api.jinhyo.dev/api/user?id=${getCookie('id')}`, fetcher)
+  useEffect(() => {
+    if (getCookie('access_token') === undefined) {
+      Swal.fire( {
+        title: '로그인 후 이용해 주세요.' ,
+        confirmButtonText: '확인',
+      }).then(() => {window.location.replace('/')})
+    } else {
+      let decoded = jwt_decode(getCookie('access_token'))
+      setUserId(decoded.id)
+      setUsername(decoded.name)
+    }
+  }, [])
+
+  const {data, error} = useSWR(`https://bookmanager-api.jinhyo.dev/api/user?id=${userId}`, fetcher)
 
   const checkEvent = (checked, id) => {
     if (checked) {
@@ -24,7 +40,7 @@ const ReturnMobile = () => {
   const returnBook = () => {
     if (checkedInputs.length > 0) {
       let data = {
-        'userId': getCookie('id'),
+        'userId': userId,
         'bookTitle': checkedInputs
       }
 
@@ -45,17 +61,6 @@ const ReturnMobile = () => {
       })
     }
   }
-
-  useEffect(() => {
-    if (getCookie('access_token') === undefined) {
-      Swal.fire({
-        title: '로그인 후 이용해 주세요.',
-        confirmButtonText: '확인',
-      }).then(() => {
-        window.location.replace('/')
-      })
-    }
-  }, [])
 
   if (error) {
     return <div>ERROR</div>
@@ -86,7 +91,7 @@ const ReturnMobile = () => {
               data.length > 0 && (
                 <div>
                   <div className={'tableContainer'}>
-                    <div style={{fontFamily: 'GyeonggiTitleM', fontSize: '15px'}}>{getCookie('name')}님의 대출 도서 수
+                    <div style={{fontFamily: 'GyeonggiTitleM', fontSize: '15px'}}>{username}님의 대출 도서 수
                       : {data.length}권
                     </div>
                     <br/>

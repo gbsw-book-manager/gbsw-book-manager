@@ -5,10 +5,13 @@ import Box from "@mui/material/Box";
 import { getCookie } from "../../utils/cookies";
 import Swal from "sweetalert2";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const RegisterMobile = () => {
   const [title, setTitle] = useState<string>('')
   const [url, setUrl] = useState<string>('')
+  const [userId, setUserId] = useState<string>()
+  const [username, setUsername] = useState<string>()
 
   useEffect(() => {
     if (getCookie('access_token') === undefined) {
@@ -18,14 +21,18 @@ const RegisterMobile = () => {
       }).then(() => {
         window.location.replace('/')
       })
+    } else {
+      let decoded: any = jwt_decode(getCookie('access_token'))
+      setUserId(decoded.id)
+      setUsername(decoded.name)
     }
   }, [])
 
   const LoadData = () => {
     if (title.length > 0 && url.length > 0) {
       let data = {
-        'identifyId': getCookie('id'),
-        'applicant': getCookie('name'),
+        'identifyId': userId,
+        'applicant': username,
         "title": title,
         "url": url
       }
