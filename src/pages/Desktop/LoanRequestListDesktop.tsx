@@ -116,13 +116,13 @@ const LoanRequestListDesktop = () => {
                               className={'acceptBtn approvalBtn'}
                             >
                               <AiOutlineCheck style={{marginBottom: '-2px'}}/>
-                              <span style={{marginLeft: '2px'}}>수락</span>
+                              <span style={{marginLeft: '2px'}}>승인</span>
                             </button>
                             <button className={'cancelBtn approvalBtn'}
                                     onClick={() => deleteLoanRequest(log.id)}
                             >
                               <ImCancelCircle style={{marginBottom: '-2px'}}/>
-                              <span style={{marginLeft: '4px'}}>거절</span>
+                              <span style={{marginLeft: '4px'}}>삭제</span>
                             </button>
                           </td>
                         </tr>
